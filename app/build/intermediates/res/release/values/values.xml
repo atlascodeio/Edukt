@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/home/hellfish2/AndroidStudioProjects/AndroidLoginAndRegistrationWithMySQLPHPSQLite3/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_about">Acerca de...</string>
+    <string name="action_settings">Opciones</string>
+    <string name="action_version">V1.0</string>
+    <string name="bienvenida">Bienvenido</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="crear_cuenta">Crear cuenta nueva?</string>
+    <string name="email">Email</string>
+    <string name="email_hint">usuario@email.com</string>
+    <string name="hello">Hello World, AndroidDashboard!</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="label_dashboard">Edukt - Timeline</string>
+    <string name="label_login">Edukt - Acceso de usuarios</string>
+    <string name="label_register">Edukt - Registro de usuarios</string>
+    <string name="login_btn">Ingresar</string>
+    <string name="login_crear">Crear cuenta nueva?</string>
+    <string name="login_message">Ingrese sus datos de acceso</string>
+    <string name="password">Contraseña</string>
+    <string name="password_hint">123456</string>
+    <string name="salir_btn">Salir</string>
+    <string name="title_activity_dashboard2">Edukt - Timeline</string>
+    <!-- From: file:/home/hellfish2/AndroidStudioProjects/AndroidLoginAndRegistrationWithMySQLPHPSQLite3/app/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="Edukt" parent="android:Theme.Light"/>
+</resources>
