@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.androidhive"
+    package="ve.ula.edukt_mobile"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="8" />
+        android:targetSdkVersion="22" />
 
     <!-- Allow to connect with internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/label_login"
-        android:theme="@style/Edukt" >
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- Dashboard Activity -->
         <activity
-            android:name="com.example.androidhive.DashboardActivity"
+            android:name="ve.ula.edukt_mobile.DashboardActivity"
             android:label="@string/label_dashboard"
             android:windowSoftInputMode="stateHidden" >
             <intent-filter>
@@ -25,19 +28,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!-- Login Activity -->
         <activity
-            android:name="com.example.androidhive.LoginActivity"
+            android:name="ve.ula.edukt_mobile.LoginActivity"
             android:label="@string/label_login"
             android:windowSoftInputMode="stateHidden" >
         </activity>
-
         <!-- Register Activity -->
         <activity
-            android:name="com.example.androidhive.RegisterActivity"
+            android:name="ve.ula.edukt_mobile.RegisterActivity"
             android:label="@string/label_register"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="ve.ula.edukt_mobile.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
