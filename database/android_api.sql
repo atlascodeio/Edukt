@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 01-06-2015 a las 18:30:28
+-- Tiempo de generación: 01-06-2015 a las 18:51:06
 -- Versión del servidor: 5.5.43-0+deb8u1
 -- Versión de PHP: 5.6.7-1
 
@@ -45,9 +45,9 @@ CREATE TABLE IF NOT EXISTS `docs` (
 INSERT INTO `docs` (`uid`, `nombre`, `tipo`, `url_doc`, `created_at`, `updated_at`, `descripcion`, `img_url`, `users_id`) VALUES
 (1, 'Plan de Evaluacion', 'excel', 'http://bit.ly/', '2015-04-24 00:00:00', '2015-03-24 00:00:00', 'Plan de Evaluacion de matematica 2015', 'http://bit.ly/', 10),
 (2, 'Tarea Taller Quimica II', 'ods', 'http://ods.org/', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 'Completen este taller para la evaluacion del segundo corte', 'http://ods.org/', 11),
-(3, 'Presentacion de quimica organica', 'ppt', 'http://ppt.org/', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 'Ejemplo presentacion de quimica organica', 'http://ppt.org/', 12),
+(3, 'Presentacion de quimica organica', 'ppt', 'http://ppt.org/', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 'Ejemplo presentacion de quimica organica', 'http://ppt.org/', 10),
 (4, 'Examen ingles III', 'ods', 'http://ods.org', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 'Prueba modelo examen ingles III', 'http://ods.org', 13),
-(5, 'Plan de evaluacion Microprocesadores', 'ods', 'http://ods.org', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 'Modelo de evaluacion microprocesadores', 'http://ods.org', 12);
+(5, 'Plan de evaluacion Microprocesadores', 'ods', 'http://ods.org', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 'Modelo de evaluacion microprocesadores', 'http://ods.org', 10);
 
 -- --------------------------------------------------------
 
@@ -168,6 +168,28 @@ MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 ALTER TABLE `users`
 MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `docs`
+--
+ALTER TABLE `docs`
+ADD CONSTRAINT `docs_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`uid`);
+
+--
+-- Filtros para la tabla `notas`
+--
+ALTER TABLE `notas`
+ADD CONSTRAINT `notas_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`uid`);
+
+--
+-- Filtros para la tabla `users`
+--
+ALTER TABLE `users`
+ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`universidad_id`) REFERENCES `universidad` (`uid`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
