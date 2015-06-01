@@ -43,7 +43,7 @@ a directory named `basic` that is directly under the Web root.
 You can then access the application through the following URL:
 
 ~~~
-http://localhost/basic/web/
+http://localhost/edukt_web/web/
 ~~~
 
 

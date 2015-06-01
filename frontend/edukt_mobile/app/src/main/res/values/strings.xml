@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">edukt_mobile</string>
+
+    <!-- Drawer menu options -->
+    <string name="title_section1">Timeline</string>
+    <string name="title_section2">Recientes</string>
+    <string name="title_section3">Documentos</string>
+    <string name="title_section4">Notificaciones</string>
+    <string name="title_section5">Profesores</string>
+    <string name="title_section6">Cuenta</string>
+    <string name="title_section7">Cerrar Sesión</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Login -->
+    <string name="hello">Hello World, AndroidDashboard!</string>
+    <string name="label_dashboard">Edukt - Mobile</string>
+    <string name="label_login">Edukt - Acceso de usuarios</string>
+    <string name="label_register">Edukt - Registro de usuarios</string>
+    <string name="bienvenida">Bienvenido</string>
+    <string name="email">Email</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_about">Acerca de...</string>
+    <string name="action_version">V1.0</string>
+    <string name="login_message">Ingrese sus datos de acceso</string>
+    <string name="login_crear">Crear cuenta nueva?</string>
+
+    <string name="email_hint">usuario@email.com</string>
+    <string name="password">Contraseña</string>
+    <string name="password_hint">123456</string>
+    <string name="login_btn">Ingresar</string>
+    <string name="salir_btn">Salir</string>
+    <string name="crear_cuenta">Crear cuenta nueva?</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="title_activity_dashboard2">Edukt - Timeline</string>
+
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_latest_fragment">Hello latest fragment</string>
+    <string name="hello_documents_fragment">Hello documents fragment</string>
+    <string name="hello_notifications_fragment">Hello notifications fragment</string>
+    <string name="hello_teachers_fragment">Hello teachers fragment</string>
+    <string name="hello_myaccount_fragment">Hello myaccount fragment</string>
+
+
+
+</resources>
