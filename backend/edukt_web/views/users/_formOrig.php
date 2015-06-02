@@ -12,15 +12,21 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'cedula')->textInput() ?>
+    <?= $form->field($model, 'unique_id')->textInput(['maxlength' => 23]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 50]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 100]) ?>
 
+    <?= $form->field($model, 'encrypted_password')->textInput(['maxlength' => 80]) ?>
+
+    <?= $form->field($model, 'salt')->textInput(['maxlength' => 10]) ?>
+
     <?= $form->field($model, 'universidad_id')->textInput() ?>
 
     <?= $form->field($model, 'tipo_user')->dropDownList([ 'Alumno' => 'Alumno', 'Profesor' => 'Profesor', ], ['prompt' => 'Seleccione']) ?>
+
+    <?= $form->field($model, 'cedula')->textInput() ?>
 
     <?= $form->field($model, 'profile_pic')->textInput(['maxlength' => 250]) ?>
 

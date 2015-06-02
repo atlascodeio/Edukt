@@ -8,6 +8,7 @@ use app\models\NotasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Expression;
 
 /**
  * NotasController implements the CRUD actions for Notas model.
@@ -62,7 +63,10 @@ class NotasController extends Controller
     {
         $model = new Notas();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            // Funcion de colocar la fecha actual de creación
+            $model->created_at = new Expression("NOW()");
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
             return $this->render('create', [
@@ -81,7 +85,10 @@ class NotasController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            // Funcion de colocar la fecha de actualización
+            $model->updated_at = new Expression("NOW()");
+            $model->save();
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
             return $this->render('update', [

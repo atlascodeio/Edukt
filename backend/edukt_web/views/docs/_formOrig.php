@@ -18,6 +18,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'url_doc')->textInput(['maxlength' => 250]) ?>
 
+    <?= $form->field($model, 'created_at')->textInput() ?>
+
+    <?= $form->field($model, 'updated_at')->textInput() ?>
+
     <?= $form->field($model, 'descripcion')->textInput(['maxlength' => 250]) ?>
 
     <?= $form->field($model, 'img_url')->textInput(['maxlength' => 250]) ?>

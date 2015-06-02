@@ -48,10 +48,10 @@ class Notas extends \yii\db\ActiveRecord
         return [
             'uid' => 'Uid',
             'nombre' => 'Nombre',
-            'descripcion' => 'Descripcion',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'users_id' => 'Users ID',
+            'descripcion' => 'Descripción',
+            'created_at' => 'Creado el',
+            'updated_at' => 'Actualizado el',
+            'users_id' => 'Creado por',
         ];
     }
 

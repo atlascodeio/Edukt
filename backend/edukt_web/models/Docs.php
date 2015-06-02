@@ -53,12 +53,12 @@ class Docs extends \yii\db\ActiveRecord
             'uid' => 'Uid',
             'nombre' => 'Nombre',
             'tipo' => 'Tipo',
-            'url_doc' => 'Url Doc',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'descripcion' => 'Descripcion',
-            'img_url' => 'Img Url',
-            'users_id' => 'Users ID',
+            'url_doc' => 'Url documento',
+            'created_at' => 'Creado el',
+            'updated_at' => 'Actualizado el',
+            'descripcion' => 'Descripción',
+            'img_url' => 'Imagen',
+            'users_id' => 'Creado por',
         ];
     }
 

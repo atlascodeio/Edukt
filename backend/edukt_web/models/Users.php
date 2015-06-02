@@ -63,16 +63,16 @@ class Users extends \yii\db\ActiveRecord
         return [
             'uid' => 'Uid',
             'unique_id' => 'Unique ID',
-            'name' => 'Name',
+            'name' => 'Nombre',
             'email' => 'Email',
             'encrypted_password' => 'Encrypted Password',
             'salt' => 'Salt',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Creado',
+            'updated_at' => 'Actualizado',
             'universidad_id' => 'Universidad',
             'tipo_user' => 'Tipo',
             'cedula' => 'Cedula',
-            'profile_pic' => 'Profile Pic',
+            'profile_pic' => 'Foto de perfil',
         ];
     }
 

@@ -12,13 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'nombre')->textInput(['maxlength' => 100]) ?>
-
     <?= $form->field($model, 'descripcion')->textInput(['maxlength' => 250]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
 
     <?= $form->field($model, 'users_id')->textInput() ?>
 

@@ -8,6 +8,7 @@ use app\models\UsersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Expression;
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -62,7 +63,10 @@ class UsersController extends Controller
     {
         $model = new Users();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            // Funcion de colocar la fecha actual de creación
+            $model->created_at = new Expression("NOW()");
+            $model->save();
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
             return $this->render('create', [
@@ -81,7 +85,10 @@ class UsersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            // Funcion de colocar la fecha de actualización
+            $model->updated_at = new Expression("NOW()");
+            $model->save();
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
             return $this->render('update', [

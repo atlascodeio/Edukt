@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\NotasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Notas';
+$this->title = 'Mensaje';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="notas-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Notas', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Crear mensaje', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,12 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'uid',
-            'nombre',
+            //'uid',
+            //'nombre',
             'descripcion',
             'created_at',
-            'updated_at',
-            // 'users_id',
+            //'updated_at',
+            'users_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

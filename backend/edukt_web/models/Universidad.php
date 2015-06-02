@@ -44,8 +44,8 @@ class Universidad extends \yii\db\ActiveRecord
         return [
             'uid' => 'Uid',
             'nombre' => 'Nombre',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Creada el',
+            'updated_at' => 'Actualizada el',
         ];
     }
 
