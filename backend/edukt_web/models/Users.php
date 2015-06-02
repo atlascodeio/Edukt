@@ -16,9 +16,13 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  * @property integer $universidad_id
- * @property integer $tipo_user
+ * @property string $tipo_user
  * @property integer $cedula
  * @property string $profile_pic
+ *
+ * @property Docs[] $docs
+ * @property Notas[] $notas
+ * @property Universidad $universidad
  */
 class Users extends \yii\db\ActiveRecord
 {
@@ -38,7 +42,8 @@ class Users extends \yii\db\ActiveRecord
         return [
             [['unique_id', 'name', 'email', 'encrypted_password', 'salt', 'universidad_id', 'tipo_user', 'cedula', 'profile_pic'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
-            [['universidad_id', 'tipo_user', 'cedula'], 'integer'],
+            [['universidad_id', 'cedula'], 'integer'],
+            [['tipo_user'], 'string'],
             [['unique_id'], 'string', 'max' => 23],
             [['name'], 'string', 'max' => 50],
             [['email'], 'string', 'max' => 100],
@@ -50,7 +55,6 @@ class Users extends \yii\db\ActiveRecord
         ];
     }
 
-
     /**
      * @inheritdoc
      */
@@ -59,16 +63,40 @@ class Users extends \yii\db\ActiveRecord
         return [
             'uid' => 'Uid',
             'unique_id' => 'Unique ID',
-            'name' => 'Nombre',
+            'name' => 'Name',
             'email' => 'Email',
             'encrypted_password' => 'Encrypted Password',
             'salt' => 'Salt',
-            'created_at' => 'Fecha de creacion',
-            'updated_at' => 'Actualizado el',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
             'universidad_id' => 'Universidad',
-            'tipo_user' => 'Tipo usuario',
+            'tipo_user' => 'Tipo',
             'cedula' => 'Cedula',
-            'profile_pic' => 'Foto de perfil',
+            'profile_pic' => 'Profile Pic',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDocs()
+    {
+        return $this->hasMany(Docs::className(), ['users_id' => 'uid']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getNotas()
+    {
+        return $this->hasMany(Notas::className(), ['users_id' => 'uid']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUniversidad()
+    {
+        return $this->hasOne(Universidad::className(), ['uid' => 'universidad_id']);
     }
 }

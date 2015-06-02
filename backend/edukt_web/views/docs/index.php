@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UniversidadSearch */
+/* @var $searchModel app\models\DocsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Universidads';
+$this->title = 'Docs';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="universidad-index">
+<div class="docs-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Universidad', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Docs', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -27,8 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'uid',
             'nombre',
+            'tipo',
+            'url_doc:url',
             'created_at',
-            'updated_at',
+            // 'updated_at',
+            // 'descripcion',
+            // 'img_url:url',
+            // 'users_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

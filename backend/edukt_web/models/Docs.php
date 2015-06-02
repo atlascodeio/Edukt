@@ -5,25 +5,28 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "notas".
+ * This is the model class for table "docs".
  *
  * @property integer $uid
  * @property string $nombre
- * @property string $descripcion
+ * @property string $tipo
+ * @property string $url_doc
  * @property string $created_at
  * @property string $updated_at
+ * @property string $descripcion
+ * @property string $img_url
  * @property integer $users_id
  *
  * @property Users $users
  */
-class Notas extends \yii\db\ActiveRecord
+class Docs extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'notas';
+        return 'docs';
     }
 
     /**
@@ -32,11 +35,12 @@ class Notas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre', 'descripcion', 'created_at', 'updated_at', 'users_id'], 'required'],
+            [['nombre', 'tipo', 'url_doc', 'created_at', 'updated_at', 'descripcion', 'img_url', 'users_id'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['users_id'], 'integer'],
             [['nombre'], 'string', 'max' => 100],
-            [['descripcion'], 'string', 'max' => 250]
+            [['tipo'], 'string', 'max' => 50],
+            [['url_doc', 'descripcion', 'img_url'], 'string', 'max' => 250]
         ];
     }
 
@@ -48,9 +52,12 @@ class Notas extends \yii\db\ActiveRecord
         return [
             'uid' => 'Uid',
             'nombre' => 'Nombre',
-            'descripcion' => 'Descripcion',
+            'tipo' => 'Tipo',
+            'url_doc' => 'Url Doc',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'descripcion' => 'Descripcion',
+            'img_url' => 'Img Url',
             'users_id' => 'Users ID',
         ];
     }

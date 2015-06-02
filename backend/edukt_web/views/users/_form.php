@@ -12,7 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-
     <?= $form->field($model, 'unique_id')->textInput(['maxlength' => 23]) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 50]) ?>
@@ -29,13 +28,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'universidad_id')->textInput() ?>
 
-    <?= $form->field($model, 'tipo_user')->textInput() ?>
+    <?= $form->field($model, 'tipo_user')->dropDownList([ 'Alumno' => 'Alumno', 'Profesor' => 'Profesor', ], ['prompt' => '']) ?>
 
     <?= $form->field($model, 'cedula')->textInput() ?>
 
     <?= $form->field($model, 'profile_pic')->textInput(['maxlength' => 250]) ?>
-
-
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

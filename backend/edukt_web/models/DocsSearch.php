@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Users;
+use app\models\Docs;
 
 /**
- * UsersSearch represents the model behind the search form about `app\models\Users`.
+ * DocsSearch represents the model behind the search form about `app\models\Docs`.
  */
-class UsersSearch extends Users
+class DocsSearch extends Docs
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class UsersSearch extends Users
     public function rules()
     {
         return [
-            [['uid', 'universidad_id', 'cedula'], 'integer'],
-            [['unique_id', 'name', 'email', 'encrypted_password', 'salt', 'created_at', 'updated_at', 'tipo_user', 'profile_pic'], 'safe'],
+            [['uid', 'users_id'], 'integer'],
+            [['nombre', 'tipo', 'url_doc', 'created_at', 'updated_at', 'descripcion', 'img_url'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class UsersSearch extends Users
      */
     public function search($params)
     {
-        $query = Users::find();
+        $query = Docs::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,17 +59,14 @@ class UsersSearch extends Users
             'uid' => $this->uid,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'universidad_id' => $this->universidad_id,
-            'cedula' => $this->cedula,
+            'users_id' => $this->users_id,
         ]);
 
-        $query->andFilterWhere(['like', 'unique_id', $this->unique_id])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'encrypted_password', $this->encrypted_password])
-            ->andFilterWhere(['like', 'salt', $this->salt])
-            ->andFilterWhere(['like', 'tipo_user', $this->tipo_user])
-            ->andFilterWhere(['like', 'profile_pic', $this->profile_pic]);
+        $query->andFilterWhere(['like', 'nombre', $this->nombre])
+            ->andFilterWhere(['like', 'tipo', $this->tipo])
+            ->andFilterWhere(['like', 'url_doc', $this->url_doc])
+            ->andFilterWhere(['like', 'descripcion', $this->descripcion])
+            ->andFilterWhere(['like', 'img_url', $this->img_url]);
 
         return $dataProvider;
     }

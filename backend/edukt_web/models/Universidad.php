@@ -11,6 +11,8 @@ use Yii;
  * @property string $nombre
  * @property string $created_at
  * @property string $updated_at
+ *
+ * @property Users[] $users
  */
 class Universidad extends \yii\db\ActiveRecord
 {
@@ -42,8 +44,16 @@ class Universidad extends \yii\db\ActiveRecord
         return [
             'uid' => 'Uid',
             'nombre' => 'Nombre',
-            'created_at' => 'Fecha de creación',
-            'updated_at' => 'Fecha de actualización',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(Users::className(), ['universidad_id' => 'uid']);
     }
 }
