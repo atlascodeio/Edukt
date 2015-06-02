@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 01-06-2015 a las 20:03:36
+-- Tiempo de generación: 02-06-2015 a las 14:05:00
 -- Versión del servidor: 5.5.43-0+deb8u1
 -- Versión de PHP: 5.6.7-1
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `docs` (
   `descripcion` varchar(250) NOT NULL,
   `img_url` varchar(250) NOT NULL,
   `users_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `docs`
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `notas` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `users_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `notas`
@@ -84,16 +84,18 @@ CREATE TABLE IF NOT EXISTS `universidad` (
   `nombre` varchar(50) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `universidad`
 --
 
 INSERT INTO `universidad` (`uid`, `nombre`, `created_at`, `updated_at`) VALUES
-(1, 'UPTM', '2015-03-24 00:00:00', '2015-03-24 00:00:00'),
-(2, 'UCAB', '2015-03-24 00:00:00', '2015-03-24 00:00:00'),
-(3, 'UCV', '2015-03-24 00:00:00', '2015-03-24 00:00:00');
+(1, 'UPTM', '2015-03-24 00:00:00', '2015-06-02 10:47:57'),
+(2, 'UCAB', '2015-03-24 00:00:00', '2015-06-01 23:34:21'),
+(3, 'UCV', '2015-03-24 00:00:00', '2015-06-01 23:34:04'),
+(4, 'UNEFA', '2015-06-01 23:24:30', '2015-06-01 23:25:32'),
+(5, 'USM', '2015-06-01 23:52:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -114,14 +116,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `tipo_user` enum('Alumno','Profesor') NOT NULL,
   `cedula` int(8) NOT NULL,
   `profile_pic` varchar(250) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`uid`, `unique_id`, `name`, `email`, `encrypted_password`, `salt`, `created_at`, `updated_at`, `universidad_id`, `tipo_user`, `cedula`, `profile_pic`) VALUES
-(10, '12314235234234234234234', 'Carlos Malave', 'hellfish2@gmail.com', 'asdasdasdksda3kel3kmdlk3mldk3mldkm3ldk3mldkmld3kmdl3kmdl3kmd1l3m2l3kemdlkm3ldkm3', 'kajsdoa3dl', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 1, 'Profesor', 11111111, 'http://bit.ly'),
+(10, '12314235234234234234234', 'Carlos Malave', 'hellfish2@gmail.com', 'asdasdasdksda3kel3kmdlk3mldk3mldkm3ldk3mldkmld3kmdl3kmdl3kmd1l3m2l3kemdlkm3ldkm3', 'kajsdoa3dl', '2015-03-24 00:00:00', '2015-06-01 23:04:28', 1, 'Profesor', 17216369, 'http://bit.ly3'),
 (11, '45353642342342342342342', 'Juan Gomez', 'jgomezbjj@gmail.com', 'aosidjoasidjaosdijaosidjaosijosaijxoasixjaosixjaosxijaosixjaosixjaosxijaosxijaos', 'i1j2lklqkd', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 1, 'Profesor', 10999999, 'http://google.com/'),
 (13, 'lkajdsalsidjdli3ldn3ldn', 'Monica Rivas', 'monicarivas1210@gmail.com', 'alskd3lmdl3kdml3kdmlkmd22lk2mlk22lk1lk2l1kj23lkjlkjldkjlskjdlaskdj33kjdlkjsldkjl', 'ñ3dlk3ñldk', '2015-03-24 00:00:00', '2015-03-24 00:00:00', 2, 'Profesor', 10928039, 'http://twitter.com/');
 
@@ -161,22 +163,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `docs`
 --
 ALTER TABLE `docs`
-MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `notas`
 --
 ALTER TABLE `notas`
-MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `universidad`
 --
 ALTER TABLE `universidad`
-MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- Restricciones para tablas volcadas
 --
