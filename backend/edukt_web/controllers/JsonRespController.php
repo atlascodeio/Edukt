@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Docs;
 use app\models\Notas;
-
+use app\models\Users;
 
 
 
@@ -14,6 +14,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Expression;
+
+
 
 /**
  * DocsController implements the CRUD actions for Docs model.
@@ -40,56 +42,75 @@ class JsonRespController extends Controller
     {
         
     	//find all the docs in array
-    	$docs = Docs::find()->asArray()->limit(5)->orderBy('uid DESC')->all();
+    	$docs = Docs::find()->limit(5)->orderBy('uid DESC')->with('users')->all();
     	
     	//find all the notas in array
-    	$notas = Notas::find()->asArray()->limit(5)->orderBy('uid DESC')->all();
+    	$notas = Notas::find()->limit(5)->orderBy('uid DESC')->all();
     	
     	//prepare final array with results
-    	$final = array();
+    	$result = array();
     	//docs
     	foreach($docs as $key=>$doc){
-    		$final[$key]['id'] = $doc['uid'];
-    		$final[$key]['name'] = $doc['nombre'];
-    		$final[$key]['image'] = 'http://api.androidhive.info/feed/img/cosmos.jpg';
-    		$final[$key]['status'] = $doc['descripcion'];
-    		$final[$key]['profilePic'] = 'http://api.androidhive.info/feed/img/nat.jpg';
-    		$final[$key]['timeStamp'] = '1403375851930';
-    		$final[$key]['url'] = null;
+    		$result[$key]['id'] = $doc->uid;
+    		$result[$key]['name'] = $doc->users->name;
+    		$result[$key]['image'] = null;
+    		$result[$key]['status'] = $doc->descripcion;
+    		$result[$key]['profilePic'] = $doc->users->profile_pic;
+    		$result[$key]['timeStamp'] = strtotime($doc->created_at).'999';
+    		$result[$key]['url'] = $doc->url_doc;
     	}
-    	$len = count($final);
+    	$len = count($result);
     	//notas
     	foreach($notas as $key=>$nota){
-    		
     		$key_aux = $key + $len;
-    		$final[$key_aux]['id'] = $nota['uid'];
-    		$final[$key_aux]['name'] = $nota['nombre'];
-    		$final[$key_aux]['image'] = 'http://api.androidhive.info/feed/img/cosmos.jpg';
-    		$final[$key_aux]['status'] = $nota['descripcion'];
-    		$final[$key_aux]['profilePic'] = 'http://api.androidhive.info/feed/img/nat.jpg';
-    		$final[$key_aux]['timeStamp'] = '1403375851930';
-    		$final[$key_aux]['url'] = null;
+    		$result[$key_aux]['id'] = $nota['uid'];
+    		$result[$key_aux]['name'] = $nota->users->name;
+    		$result[$key_aux]['image'] = null;
+    		$result[$key_aux]['status'] = $nota['descripcion'];
+    		$result[$key_aux]['profilePic'] = $nota->users->profile_pic;
+    		$result[$key_aux]['timeStamp'] = strtotime($doc['created_at']).'999';
+    		//$final[$key_aux]['created_at'] = strtotime($doc['created_at']);
+    		$result[$key_aux]['url'] = null;
     	}
     	
+    	//Render partial becasue is a Json respond
+    	return $this->renderPartial('getTimeline', array('result'=>$result));
+    }
+    
+    
+    /**
+     * Return JsonArray with JsonObjects containing list of teachers
+     * @return mixed
+     */
+    public function actionGetTeachers()
+    {
+    
+    	//find all the docs in array
+    	$teachers = Users::find()->where(array('tipo_user'=>'Profesor'))->all();
     	
+    	//prepare final array with results
+    	$result = array();
+    	foreach($teachers as $key=>$teacher){
+    		$result[$key]['id'] = $teacher->uid;
+    		$result[$key]['name'] = $teacher->name;
+    		$result[$key]['image'] = null;
+    		$result[$key]['status'] = 'Universidad: '.$teacher->universidad->nombre;
+    		$result[$key]['profilePic'] = $teacher->profile_pic;
+    		$result[$key]['timeStamp'] = null;
+    		$result[$key]['url'] = null;
+    		$result[$key]['email'] = 'Email: '.$teacher->email;
+    	}
     	
-    	
-    	
-    	/*
-    	{
-    		"id": 1,
-    		"name": "National Geographic Channel",
-            "image": "http://api.androidhive.info/feed/img/cosmos.jpg",
-            "status": "\"Science is a beautiful and emotional human endeavor,\" says Brannon Braga, executive producer and director. \"And Cosmos is all about making science an experience.\"",
-            "profilePic": "http://api.androidhive.info/feed/img/nat.jpg",
-            "timeStamp": "1403375851930",
-    	            		"url": null
-    	}*/
-    	
-    	$final = array('feed'=>$final);
+    	$final = array('feed'=>$result);
     	$json = json_encode($final);
     	echo $json;
+    	
     }
+    
+    
+    
+    
+    
 
    
 }
