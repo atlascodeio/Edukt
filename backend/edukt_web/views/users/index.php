@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Universidad;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UsersSearch */
@@ -25,12 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+
+
             //'uid',
             //'unique_id',
             'cedula',
             'name',
             'tipo_user',
-            'universidad_id',
+            //'universidad.nombre',
+            ['attribute'=>'universidad_id','value'=>'universidad.nombre',],
             'email:email',
             //'encrypted_password',
             // 'salt',

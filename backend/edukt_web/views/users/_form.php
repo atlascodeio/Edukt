@@ -20,6 +20,8 @@ use app\models\Universidad;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => 100]) ?>
 
+    <?= $form->field($model, 'encrypted_password')->textInput(['maxlength' => 80]) ?>
+
     <?= $form->field($model, 'universidad_id')->dropDownList(
           ArrayHelper::map(universidad::find()->all(),'uid','nombre'),
           ['prompt'=>'Seleccione su universidad']

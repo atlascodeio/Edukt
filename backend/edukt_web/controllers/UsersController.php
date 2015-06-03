@@ -35,7 +35,7 @@ class UsersController extends Controller
     {
         $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-                
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -67,7 +67,18 @@ class UsersController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             // Funcion de colocar la fecha actual de creación
             $model->created_at = new Expression("NOW()");
-            $model->save();
+            $model->unique_id = uniqid('', true);
+
+            $hash = $this->hashSSHA($model->encrypted_password);
+
+            $encrypted_password = $hash["encrypted"]; // encrypted password
+            $model->encrypted_password = $encrypted_password;
+
+            $salt = $hash["salt"]; // salt
+            $model->salt = $salt;
+
+            $model->save(false);
+
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
             return $this->render('create', [
@@ -89,7 +100,18 @@ class UsersController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             // Funcion de colocar la fecha de actualización
             $model->updated_at = new Expression("NOW()");
-            $model->save();
+
+            $model->unique_id = uniqid('', true);
+
+            $hash = $this->hashSSHA($model->encrypted_password);
+
+            $encrypted_password = $hash["encrypted"]; // encrypted password
+            $model->encrypted_password = $encrypted_password;
+
+            $salt = $hash["salt"]; // salt
+            $model->salt = $salt;
+
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
             return $this->render('update', [
@@ -125,5 +147,19 @@ class UsersController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+    }
+
+    /**
+
+    */
+
+    public function hashSSHA($password) {
+
+      $salt = sha1(rand());
+      $salt = substr($salt, 0, 10);
+      $encrypted = base64_encode(sha1($password . $salt, true) . $salt);
+      $hash = array("salt" => $salt, "encrypted" => $encrypted);
+      return $hash;
     }
 }

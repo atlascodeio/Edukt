@@ -65,13 +65,13 @@ class Users extends \yii\db\ActiveRecord
             'unique_id' => 'Unique ID',
             'name' => 'Nombre',
             'email' => 'Email',
-            'encrypted_password' => 'Encrypted Password',
+            'encrypted_password' => 'Contraseña',
             'salt' => 'Salt',
             'created_at' => 'Creado',
             'updated_at' => 'Actualizado',
             'universidad_id' => 'Universidad',
             'tipo_user' => 'Tipo',
-            'cedula' => 'Cedula',
+            'cedula' => 'Cédula',
             'profile_pic' => 'Foto de perfil',
         ];
     }

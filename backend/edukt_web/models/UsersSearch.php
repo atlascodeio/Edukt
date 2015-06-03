@@ -18,8 +18,8 @@ class UsersSearch extends Users
     public function rules()
     {
         return [
-            [['uid', 'universidad_id', 'cedula'], 'integer'],
-            [['unique_id', 'name', 'email', 'encrypted_password', 'salt', 'created_at', 'updated_at', 'tipo_user', 'profile_pic'], 'safe'],
+            [['uid', 'cedula'], 'integer'],
+            [['unique_id', 'universidad_id', 'name', 'email', 'encrypted_password', 'salt', 'created_at', 'updated_at', 'tipo_user', 'profile_pic'], 'safe'],
         ];
     }
 
@@ -55,11 +55,13 @@ class UsersSearch extends Users
             return $dataProvider;
         }
 
+        $query->joinWith('universidad');
+
         $query->andFilterWhere([
             'uid' => $this->uid,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'universidad_id' => $this->universidad_id,
+            //'universidad_id' => $this->universidad_id,
             'cedula' => $this->cedula,
         ]);
 
@@ -69,7 +71,8 @@ class UsersSearch extends Users
             ->andFilterWhere(['like', 'encrypted_password', $this->encrypted_password])
             ->andFilterWhere(['like', 'salt', $this->salt])
             ->andFilterWhere(['like', 'tipo_user', $this->tipo_user])
-            ->andFilterWhere(['like', 'profile_pic', $this->profile_pic]);
+            ->andFilterWhere(['like', 'profile_pic', $this->profile_pic])
+            ->andFilterWhere(['like', 'universidad.nombre', $this->universidad_id]);
 
         return $dataProvider;
     }
