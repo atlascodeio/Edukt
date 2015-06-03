@@ -7,6 +7,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,13 @@ public class FeedListAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private List<FeedItem> feedItems;
 	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+	private String modulo;
 
-	public FeedListAdapter(Activity activity, List<FeedItem> feedItems) {
+	public FeedListAdapter(Activity activity, List<FeedItem> feedItems, String modulo) {
 		this.activity = activity;
 		this.feedItems = feedItems;
+		this.modulo = modulo;
+
 	}
 
 
@@ -72,26 +76,26 @@ public class FeedListAdapter extends BaseAdapter {
 			imageLoader = AppController.getInstance().getImageLoader();
 
 		TextView name = (TextView) convertView.findViewById(R.id.name);
-		TextView timestamp = (TextView) convertView
-				.findViewById(R.id.timestamp);
-		TextView statusMsg = (TextView) convertView
-				.findViewById(R.id.txtStatusMsg);
+		TextView timestamp = (TextView) convertView.findViewById(R.id.timestamp);
+		TextView statusMsg = (TextView) convertView.findViewById(R.id.txtStatusMsg);
 		TextView url = (TextView) convertView.findViewById(R.id.txtUrl);
-		NetworkImageView profilePic = (NetworkImageView) convertView
-				.findViewById(R.id.profilePic);
-		FeedImageView feedImageView = (FeedImageView) convertView
-				.findViewById(R.id.feedImage1);
+		TextView other1 = (TextView) convertView.findViewById(R.id.other1);
+		NetworkImageView profilePic = (NetworkImageView) convertView.findViewById(R.id.profilePic);
+		//FeedImageView feedImageView = (FeedImageView) convertView.findViewById(R.id.feedImage1);
 
 		FeedItem item = feedItems.get(position);
 
 		name.setText(item.getName());
 
-		// Converting timestamp into x ago format
-		CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
-				Long.parseLong(item.getTimeStamp()),
-				System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
-		timestamp.setText(timeAgo);
-
+		// Converting timestamp into x ago format00
+		if(item.getTimeStamp() != null) {
+			CharSequence timeAgo = DateUtils.getRelativeTimeSpanString(
+					Long.parseLong(item.getTimeStamp()),
+					System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+			timestamp.setText(timeAgo);
+		} else {
+			timestamp.setVisibility(View.GONE);
+		}
 		// Chcek for empty status message
 		if (!TextUtils.isEmpty(item.getStatus())) {
 			statusMsg.setText(item.getStatus());
@@ -117,23 +121,13 @@ public class FeedListAdapter extends BaseAdapter {
 		// user profile pic
 		profilePic.setImageUrl(item.getProfilePic(), imageLoader);
 
-		// Feed image
-		if (item.getImge() != null) {
-			feedImageView.setImageUrl(item.getImge(), imageLoader);
-			feedImageView.setVisibility(View.VISIBLE);
-			feedImageView
-					.setResponseObserver(new FeedImageView.ResponseObserver() {
-						@Override
-						public void onError() {
-						}
-
-						@Override
-						public void onSuccess() {
-						}
-					});
+		//If modulo is not teachers then remove the other1 textview
+		if(modulo != "teachers"){
+			other1.setVisibility(View.GONE);
 		} else {
-			feedImageView.setVisibility(View.GONE);
+			other1.setText(item.getEmail());
 		}
+
 
 		return convertView;
 	}

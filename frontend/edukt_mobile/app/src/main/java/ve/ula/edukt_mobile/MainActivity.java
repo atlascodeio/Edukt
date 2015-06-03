@@ -1,6 +1,7 @@
 package ve.ula.edukt_mobile;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import ve.ula.edukt_mobile.library.UserFunctions;
+
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -29,7 +32,7 @@ public class MainActivity extends ActionBarActivity
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     * Used to store the last screen title. }.
      */
     private CharSequence mTitle;
 
@@ -76,24 +79,24 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section1);
                 break;
             case 2:
-                fragment = new LatestFragment();
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
                 fragment = new DocumentsFragment();
                 mTitle = getString(R.string.title_section3);
                 break;
-            case 4:
+            case 3:
                 fragment = new NotificationsFragment();
                 mTitle = getString(R.string.title_section4);
                 break;
-            case 5:
+            case 4:
                 fragment = new TeachersFragment();
                 mTitle = getString(R.string.title_section5);
                 break;
-            case 6:
+            case 5:
                 fragment = new MyAccountFragment();
                 mTitle = getString(R.string.title_section6);
+                break;
+            case 6:
+                fragment = null;
+                this.callLogout();
                 break;
             default:
                 fragment = null;
@@ -109,33 +112,6 @@ public class MainActivity extends ActionBarActivity
                     .commit();
 
         }
-
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-            default:
-                mTitle = "jojojojojo";
-                break;
-        }
-
-
-    }
-
-    public void restoreActionBar() {
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        //actionBar.setDisplayShowTitleEnabled(false);
-        //actionBar.setTitle(mTitle);
 
     }
 
@@ -172,46 +148,22 @@ public class MainActivity extends ActionBarActivity
         return mTitle;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    //Logout method
+    public void callLogout(){
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
+        UserFunctions userFunctions = new UserFunctions();
+        userFunctions.logoutUser(getApplicationContext());
+        Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+        login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(login);
+        // Closing dashboard screen
+        finish();
 
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-
-
-        }
     }
+
+
+
+
+
 
 }

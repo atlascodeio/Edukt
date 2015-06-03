@@ -6,4 +6,6 @@
     <color name="feed_item_border">#c2c3c8</color>
     <color name="link">#0a80d1</color>
     <color name="timestamp">#a0a3a7</color>
+
+    <color name="app_bg">#182138</color>
 </resources>

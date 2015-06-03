@@ -40,13 +40,12 @@
     <string name="bienvenido">Bienvenido</string>
     <string name="title_activity_dashboard2">Edukt - Timeline</string>
 
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_latest_fragment">Hello latest fragment</string>
-    <string name="hello_documents_fragment">Hello documents fragment</string>
-    <string name="hello_notifications_fragment">Hello notifications fragment</string>
-    <string name="hello_teachers_fragment">Hello teachers fragment</string>
-    <string name="hello_myaccount_fragment">Hello myaccount fragment</string>
+    <!-- Urls String -->
+    <string name="url_json_gettimeline">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-timeline</string>
+    <string name="url_json_getteachers">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-teachers</string>
+    <string name="url_json_getnotifications">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-notifications</string>
+    <string name="url_json_getdocuments">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-documents</string>
+    <string name="url_json_getmyaccount">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-my-account</string>
 
 
 

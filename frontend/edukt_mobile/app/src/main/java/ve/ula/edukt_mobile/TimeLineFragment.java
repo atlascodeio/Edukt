@@ -60,7 +60,8 @@ public class TimeLineFragment extends Fragment {
     private ListView listView;
     private FeedListAdapter listAdapter;
     private List<FeedItem> feedItems;
-    private String URL_FEED = "http://api.androidhive.info/feed/feed.json";
+    //private String URL_FEED = "http://api.androidhive.info/feed/feed.json";
+    private String URL_FEED;
 
 
     /**
@@ -92,40 +93,25 @@ public class TimeLineFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
-
-
-
-
-
-
-
-
+        //Url to get json response
+        URL_FEED =   getActivity().getString(R.string.url_json_gettimeline);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_time_line, container, false);
-        //return inflater.inflate(R.layout.fragment_time_line, container, false);
 
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_time_line, container, false);
         listView = (ListView) view.findViewById(R.id.list);
-
-
-
         feedItems = new ArrayList<FeedItem>();
-
-        //listAdapter = new FeedListAdapter(this, feedItems);
-        listAdapter = new FeedListAdapter(getActivity(), feedItems);
+        listAdapter = new FeedListAdapter(getActivity(), feedItems, "Timeline");
         listView.setAdapter(listAdapter);
 
         // We first check for cached request
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
         Entry entry = cache.get(URL_FEED);
-        if (entry != null) {
+        if (entry != null && !(entry.isExpired())) {
             // fetch the data from cache
             try {
                 String data = new String(entry.data, "UTF-8");
@@ -165,8 +151,6 @@ public class TimeLineFragment extends Fragment {
         }
 
         return view;
-
-
     }
 
 
