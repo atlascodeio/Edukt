@@ -200,6 +200,7 @@ public class RegisterActivity extends Activity {
 				public void onNothingSelected(AdapterView<?> parent) {
 				}
 			});
+			inputSpinner.setPrompt(getString(R.string.spinner_prompt));
 			inputSpinner.setAdapter(dataAdapter);
 
 		} catch (JSONException e) {

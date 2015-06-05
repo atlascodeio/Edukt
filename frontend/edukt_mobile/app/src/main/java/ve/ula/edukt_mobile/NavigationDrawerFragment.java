@@ -25,6 +25,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ve.ula.edukt_mobile.adapter.CustomDrawerAdapter;
+import ve.ula.edukt_mobile.data.DrawerItem;
+import ve.ula.edukt_mobile.data.FeedItem;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
@@ -104,7 +111,8 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
 
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+        //Define the adapter for the listview of navigation drawer
+        /*ArrayAdapter drawerAdapter = new ArrayAdapter<String>(
                 getActivity().getBaseContext(),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
@@ -115,7 +123,19 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section5),
                         getString(R.string.title_section6),
                         getString(R.string.title_section7),
-                }));
+        });*/
+        List<DrawerItem> drawerItems = new ArrayList<DrawerItem>();
+        drawerItems.add(new DrawerItem(1, getString(R.string.title_section1), "\uF046"));
+        drawerItems.add(new DrawerItem(1, getString(R.string.title_section3), "\uF011"));
+        drawerItems.add(new DrawerItem(1, getString(R.string.title_section4), "\uF059"));
+        drawerItems.add(new DrawerItem(1, getString(R.string.title_section5), "\uF037"));
+        drawerItems.add(new DrawerItem(1, getString(R.string.title_section6), "\uF049"));
+        drawerItems.add(new DrawerItem(1, getString(R.string.title_section7), "\uF036"));
+
+        CustomDrawerAdapter drawerAdapter = new CustomDrawerAdapter(getActivity(), drawerItems);
+
+
+        mDrawerListView.setAdapter(drawerAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -223,6 +243,11 @@ public class NavigationDrawerFragment extends Fragment {
         }
     }
 
+    //close the drawer
+    public void closeDrawer(){
+        mDrawerLayout.closeDrawer(mFragmentContainerView);
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -305,4 +330,7 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+
+
+
 }

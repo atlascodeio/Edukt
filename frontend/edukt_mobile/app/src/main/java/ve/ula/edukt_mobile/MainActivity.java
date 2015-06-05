@@ -162,6 +162,20 @@ public class MainActivity extends ActionBarActivity
     }
 
 
+    //when user press back button then close the drawer
+    @Override
+    public void onBackPressed(){
+        if(mNavigationDrawerFragment.isDrawerOpen()){
+            mNavigationDrawerFragment.closeDrawer();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
+
+
+
+
 
 
 

@@ -177,8 +177,11 @@ public class MyAccountFragment extends Fragment {
             // user profile pic
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             NetworkImageView profilePic = (NetworkImageView) view.findViewById(R.id.profilePic);
-            profilePic.setImageUrl(response.getString("profilePic"), imageLoader);
 
+            if(!response.isNull("url"))
+                profilePic.setImageUrl(response.getString("profilePic"), imageLoader);
+            else
+                profilePic.setDefaultImageResId(R.drawable.profile);
                 /*JSONObject feedObj = (JSONObject) feedArray.get(i);
 
                 FeedItem item = new FeedItem();

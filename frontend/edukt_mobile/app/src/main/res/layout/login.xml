@@ -25,14 +25,14 @@
             android:id="@+id/textView"
             android:textStyle="bold"
             android:layout_marginTop="49dp"
-            android:layout_below="@+id/textView3"
+            android:layout_below="@+id/imageView"
             android:layout_alignParentLeft="true" />
 		<!--  Email TextField -->
         <EditText
             android:id="@+id/loginEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="#ff000000"
+            android:textColor="#ffffff"
             android:textColorHint="#ffcccccc"
             android:hint="@string/email_hint"
             android:layout_below="@+id/textView"
@@ -56,7 +56,7 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:password="true"
-            android:textColor="#ff000000"
+            android:textColor="#ffffff"
             android:textColorHint="#ffcccccc"
             android:hint="@string/password_hint"
             android:layout_below="@+id/textView2"
@@ -103,20 +103,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:background="@drawable/ic_launcher"
+            android:background="@drawable/splash_small"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="22dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edukt"
-            android:id="@+id/textView3"
-            android:textColor="#ffffffff"
-            android:textSize="30dp"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
