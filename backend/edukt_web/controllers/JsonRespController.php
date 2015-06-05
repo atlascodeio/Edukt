@@ -5,8 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Docs;
 use app\models\Notas;
-
-
+use app\models\Users;
+use app\models\Universidad;
 
 
 use app\models\DocsSearch;
@@ -15,12 +15,18 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Expression;
 
+
+
 /**
  * DocsController implements the CRUD actions for Docs model.
  */
 class JsonRespController extends Controller
 {
-    public function behaviors()
+	
+	//To avoid the 400 error returned by yii at the request  body with json objects params
+	public $enableCsrfValidation = false;
+	
+	public function behaviors()
     {
         return [
             'verbs' => [
@@ -40,37 +46,28 @@ class JsonRespController extends Controller
     {
         
     	//find all the docs in array
-    	$docs = Docs::find()->asArray()->limit(5)->orderBy('uid DESC')->all();
+    	$docs = Docs::find()->limit(5)->orderBy('uid DESC')->with('users')->all();
     	
     	//find all the notas in array
-    	$notas = Notas::find()->asArray()->limit(5)->orderBy('uid DESC')->all();
+    	$notas = Notas::find()->limit(5)->orderBy('uid DESC')->all();
     	
     	//prepare final array with results
-    	$final = array();
+    	$result = array();
     	//docs
     	foreach($docs as $key=>$doc){
-    		$final[$key]['id'] = $doc['uid'];
-    		$final[$key]['name'] = $doc['nombre'];
-    		$final[$key]['image'] = 'http://api.androidhive.info/feed/img/cosmos.jpg';
-    		$final[$key]['status'] = $doc['descripcion'];
-    		$final[$key]['profilePic'] = 'http://api.androidhive.info/feed/img/nat.jpg';
-    		$final[$key]['timeStamp'] = '1403375851930';
-    		$final[$key]['url'] = null;
+    		$result[$key]['id'] = $doc->uid;
+    		$result[$key]['name'] = $doc->users->name;
+    		$result[$key]['image'] = null;
+    		$result[$key]['status'] = $doc->descripcion;
+    		$result[$key]['profilePic'] = $doc->users->profile_pic;
+    		$result[$key]['timeStamp'] = strtotime($doc->created_at).'999';
+    		$result[$key]['url'] = $doc->url_doc;
+    		$result[$key]['nombre'] = $doc->nombre;
     	}
-    	$len = count($final);
+    	$len = count($result);
     	//notas
     	foreach($notas as $key=>$nota){
-    		
     		$key_aux = $key + $len;
-<<<<<<< HEAD
-    		$final[$key_aux]['id'] = $nota['uid'];
-    		$final[$key_aux]['name'] = $nota['nombre'];
-    		$final[$key_aux]['image'] = 'http://api.androidhive.info/feed/img/cosmos.jpg';
-    		$final[$key_aux]['status'] = $nota['descripcion'];
-    		$final[$key_aux]['profilePic'] = 'http://api.androidhive.info/feed/img/nat.jpg';
-    		$final[$key_aux]['timeStamp'] = '1403375851930';
-    		$final[$key_aux]['url'] = null;
-=======
     		$result[$key_aux]['id'] = $nota['uid'];
     		$result[$key_aux]['name'] = $nota->users->name;
     		$result[$key_aux]['image'] = null;
@@ -79,30 +76,41 @@ class JsonRespController extends Controller
     		$result[$key_aux]['timeStamp'] = strtotime($nota['created_at']).'999';
     		//$final[$key_aux]['created_at'] = strtotime($doc['created_at']);
     		$result[$key_aux]['url'] = null;
->>>>>>> 1526136585946d7fd1d83ea3375b3b1bbc23fccc
     	}
     	
+    	//Render partial becasue is a Json respond
+    	return $this->renderPartial('getTimeline', array('result'=>$result));
+    }
+    
+    
+    /**
+     * Return JsonArray with JsonObjects containing list of teachers
+     * @return mixed
+     */
+    public function actionGetTeachers()
+    {
+    
+    	//find all the docs in array
+    	$teachers = Users::find()->where(array('tipo_user'=>'Profesor'))->all();
     	
+    	//prepare final array with results
+    	$result = array();
+    	foreach($teachers as $key=>$teacher){
+    		$result[$key]['id'] = $teacher->uid;
+    		$result[$key]['name'] = $teacher->name;
+    		$result[$key]['image'] = null;
+    		$result[$key]['status'] = 'Universidad: '.$teacher->universidad->nombre;
+    		$result[$key]['profilePic'] = $teacher->profile_pic;
+    		$result[$key]['timeStamp'] = null;
+    		$result[$key]['url'] = null;
+    		$result[$key]['email'] = 'Email: '.$teacher->email;
+    	}
     	
-    	
-    	
-    	/*
-    	{
-    		"id": 1,
-    		"name": "National Geographic Channel",
-            "image": "http://api.androidhive.info/feed/img/cosmos.jpg",
-            "status": "\"Science is a beautiful and emotional human endeavor,\" says Brannon Braga, executive producer and director. \"And Cosmos is all about making science an experience.\"",
-            "profilePic": "http://api.androidhive.info/feed/img/nat.jpg",
-            "timeStamp": "1403375851930",
-    	            		"url": null
-    	}*/
-    	
-    	$final = array('feed'=>$final);
+    	$final = array('feed'=>$result);
     	$json = json_encode($final);
     	echo $json;
+    	
     }
-<<<<<<< HEAD
-=======
     
     /**
      * Return JsonArray with JsonObjects containing list of notas
@@ -153,6 +161,7 @@ class JsonRespController extends Controller
     		$result[$key]['profilePic'] = $doc->users->profile_pic;
     		$result[$key]['timeStamp'] = strtotime($doc->created_at).'999';
     		$result[$key]['url'] = $doc->url_doc;
+    		$result[$key]['nombre'] = $doc->nombre;
     	}
     
     	$final = array('feed'=>$result);
@@ -168,31 +177,58 @@ class JsonRespController extends Controller
     public function actionGetMyAccount()
     {
     
-    	$id = 10;
+    	$body = file_get_contents('php://input');
+    	$postvars = json_decode($body, true);
+    	$unique_id = $postvars["id"];
+    	
+    	//$id = 10;
     	//find the user loged data object
-    	$user = Users::findOne(['uid'=>$id]);
+    	$user = Users::findOne(['unique_id'=>$unique_id]);
     
     	//prepare final array with results
     	$result = array();
     	$result['id'] = $user->uid;
     	$result['name'] = $user->name;
     	$result['image'] = null;
-    	$result['status'] = 'Universidad: '.$user->universidad->nombre;
+    	$result['status'] = $user->universidad->nombre;
     	$result['profilePic'] = $user->profile_pic;
     	$result['timeStamp'] = null;
     	$result['url'] = null;
-    	$result['email'] = 'Email: '.$user->email;
+    	$result['email'] = $user->email;
+    	$result['cedula'] = $user->cedula;
     	
     	$json = json_encode($result);
     	echo $json;
+    }
     
+    
+    /**
+     * Return JsonArray with JsonObjects containing list of universidades
+     * @return mixed
+     */
+    public function actionGetUniversidades()
+    {
+    
+    	//find all the docs in array
+    	$universidades = Universidad::find()->orderBy('nombre ASC')->all();
+    	 
+    	//prepare final array with results
+    	$result = array();
+    	foreach($universidades as $key=>$universidad){
+    		$result[$key]['id'] = $universidad->uid;
+    		$result[$key]['nombre'] = $universidad->nombre;
+    	}
+    	 
+    	$final = array('feed'=>$result);
+    	$json = json_encode($final);
+    	echo $json;
+    	 
     }
     
     
     
     
     
->>>>>>> 1526136585946d7fd1d83ea3375b3b1bbc23fccc
 
    
 }
