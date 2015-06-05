@@ -9,6 +9,7 @@
     <string name="title_section5">Profesores</string>
     <string name="title_section6">Mi cuenta</string>
     <string name="title_section7">Cerrar sesión</string>
+    <string name="Registrarse">sucorreo@mail.com</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -34,7 +35,10 @@
     <string name="login_crear">Crear cuenta nueva?</string>
 
     <string name="email_hint">sucorreo@mail.com</string>
-    <string name="password">Contraseña</string>
+    <string name="nombre_completo">Nombre y apellido</string>
+    <string name="cedula">Cédula Ej: 18272737</string>
+    <string name="password">Ingrese su contraseña</string>
+    <string name="password_confirm">Confirme su contraseña</string>
     <string name="password_hint">123456890</string>
     <string name="login_btn">Ingresar</string>
     <string name="salir_btn">Salir</string>

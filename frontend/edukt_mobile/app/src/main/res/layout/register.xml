@@ -11,79 +11,74 @@
         android:padding="10dip" >
 		<!--  View Title Label -->
         <!--  Name Label -->
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre completo" />
-		<!--  Name TextField -->
+        <!--  Name TextField -->
+
         <EditText
             android:id="@+id/registerName"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/register"
+            android:hint="@string/nombre_completo"/>
         
 		<!--  Email Label -->
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Email" />
-		<!--  Email TextField -->
+        <!--  Email TextField -->
         <EditText
             android:id="@+id/registerEmail"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <!--  Cedula Label -->
-        <TextView
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dip"
-            android:text="Cedula" />
-        <!--  Cedula TextField -->
+            android:hint="@string/Registrarse"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/register"/>
+
+        <!--  Cedula Label --><![CDATA[
+        />
+        ]]><!--  Cedula TextField -->
         <EditText
             android:id="@+id/registerCedula"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/register"
+            android:hint="@string/cedula"/>
 
-        <!--  Universidad Label -->
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dip"
-            android:text="Universidad" />
+        <!--  Universidad Label --><![CDATA[
+        />
 
-        <!--  Universidad Spinner -->
-        <Spinner
-            android:id="@+id/registerUniversidad"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:prompt="@string/spinner_prompt"/>
-        
-		<!--  Password Label -->
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dip"
-            android:text="Password" />
-		<!--  Password TextField -->
+        ]]><!--  Universidad Spinner -->
+
+        <!--  Password Label --><![CDATA[
+        />
+		]]><!--  Password TextField -->
         <EditText
             android:id="@+id/registerPassword"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:password="true" />
+            android:password="true"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/register"
+            android:hint="@string/password"/>
         
         <!--  Error message -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dip"
-            android:text="Confirmar password"/>
 
         <EditText
             android:id="@+id/registerPasswordConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:password="true" />
+            android:password="true"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/register"
+            android:hint="@string/password_confirm"
+            android:paddingBottom="20dip" />
+
+        <Spinner
+            android:id="@+id/registerUniversidad"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/spinner_prompt"
+            android:spinnerMode="dialog"
+            android:labelFor="@string/spinner_prompt" />
 
         <TextView android:id="@+id/register_error"
             		android:layout_width="fill_parent"
