@@ -34,11 +34,11 @@ public class CustomDrawerAdapter extends BaseAdapter {
 	private List<DrawerItem> drawerItems;
 	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 	private String modulo;
+	private Integer selected;
 
 	public CustomDrawerAdapter(Activity activity, List<DrawerItem> drawerItems) {
 		this.activity = activity;
 		this.drawerItems = drawerItems;
-		this.modulo = modulo;
 
 	}
 
@@ -83,7 +83,6 @@ public class CustomDrawerAdapter extends BaseAdapter {
         if(position != 4){
             view.setVisibility(View.GONE);
         }
-
 
         return convertView;
 	}

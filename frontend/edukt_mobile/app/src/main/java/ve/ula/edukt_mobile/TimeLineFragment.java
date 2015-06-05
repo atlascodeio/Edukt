@@ -4,6 +4,7 @@ package ve.ula.edukt_mobile;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,6 +64,9 @@ public class TimeLineFragment extends Fragment {
     private List<FeedItem> feedItems;
     //private String URL_FEED = "http://api.androidhive.info/feed/feed.json";
     private String URL_FEED;
+
+    private SwipeRefreshLayout swipeContainer;
+    private ProgressDialog pDialog;
 
 
     /**
@@ -128,36 +132,63 @@ public class TimeLineFragment extends Fragment {
 
         } else {
 
-            final ProgressDialog pDialog = new ProgressDialog(getActivity());
+            pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage(getString(R.string.progress_dialog));
             pDialog.show();
-            // making fresh volley request and getting json
-            JsonObjectRequest jsonReq = new JsonObjectRequest(Method.GET,
-                    URL_FEED, null, new Response.Listener<JSONObject>() {
-
-                @Override
-                public void onResponse(JSONObject response) {
-                    VolleyLog.d(TAG, "Response: " + response.toString());
-                    if (response != null) {
-                        pDialog.hide();
-                        parseJsonFeed(response);
-
-                    }
-                }
-            }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.d(TAG, "Error: " + error.getMessage());
-                    pDialog.hide();
-                }
-            });
-
-            // Adding request to volley request queue
-            AppController.getInstance().addToRequestQueue(jsonReq);
+            fecthData();
         }
 
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                fecthData();
+                }
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
         return view;
+    }
+
+
+    //Http request in Json Format
+    public void fecthData(){
+        // making fresh volley request and getting json
+        JsonObjectRequest jsonReq = new JsonObjectRequest(Method.GET,
+                URL_FEED, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                VolleyLog.d(TAG, "Response: " + response.toString());
+                if (response != null) {
+                    swipeContainer.setRefreshing(false);
+                    pDialog.hide();
+                    listAdapter.clear();
+                    parseJsonFeed(response);
+
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                pDialog.hide();
+            }
+        });
+
+        // Adding request to volley request queue
+        AppController.getInstance().addToRequestQueue(jsonReq);
+
     }
 
 
