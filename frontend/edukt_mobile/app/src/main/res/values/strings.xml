@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">edukt_mobile</string>
+    <string name="app_name">Edukt</string>
 
     <!-- Drawer menu options -->
     <string name="title_section1">Timeline</string>
     <string name="title_section2">Recientes</string>
     <string name="title_section3">Documentos</string>
-    <string name="title_section4">Notificaciones</string>
+    <string name="title_section4">Mensajes</string>
     <string name="title_section5">Profesores</string>
     <string name="title_section6">Cuenta</string>
-    <string name="title_section7">Cerrar Sesión</string>
+    <string name="title_section7">Cerrar sesión</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -43,18 +43,25 @@
     <string name="title_activity_dashboard2">Edukt - Timeline</string>
 
     <!-- Urls String -->
-    <string name="url_json_gettimeline">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-timeline</string>
+    <!--<string name="url_json_gettimeline">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-timeline</string>
     <string name="url_json_getteachers">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-teachers</string>
     <string name="url_json_getnotifications">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-notifications</string>
     <string name="url_json_getdocuments">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-documents</string>
     <string name="url_json_getmyaccount">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-my-account</string>
-    <string name="url_json_getuniversidades">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-universidades</string>
+    <string name="url_json_getuniversidades">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-my-account</string>-->
+    <string name="url_json_gettimeline">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-timeline</string>
+    <string name="url_json_getteachers">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-teachers</string>
+    <string name="url_json_getnotifications">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-notifications</string>
+    <string name="url_json_getdocuments">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-documents</string>
+    <string name="url_json_getmyaccount">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-my-account</string>
+    <string name="url_json_getuniversidades">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-universidades</string>
 
     <!-- myAccount -->
     <string name="account_name">Nombre:</string>
     <string name="account_email">Email:</string>
     <string name="account_cedula">Cedula:</string>
     <string name="account_universidad">Universidad:</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
 
 
 
