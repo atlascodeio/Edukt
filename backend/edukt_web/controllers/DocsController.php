@@ -63,10 +63,14 @@ class DocsController extends Controller
     {
         $model = new Docs();
 
+
+
         if ($model->load(Yii::$app->request->post())) {
             // Funcion de colocar la fecha actual de creación
+
             $model->created_at = new Expression("NOW()");
-            $model->save(false);
+
+            $model->save();
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
             return $this->render('create', [

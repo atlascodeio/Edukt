@@ -112,4 +112,13 @@ return array (
       '@dosamigos/fileupload' => $vendorDir . '/2amigos/yii2-file-upload-widget/src',
     ),
   ),
+  '2amigos/yii2-file-input-widget' => 
+  array (
+    'name' => '2amigos/yii2-file-input-widget',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@dosamigos/fileinput' => $vendorDir . '/2amigos/yii2-file-input-widget/src',
+    ),
+  ),
 );

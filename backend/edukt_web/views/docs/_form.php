@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use dosamigos\fileupload\FileUploadUI;
 use yii\helpers\ArrayHelper;
 use app\models\Users;
+use dosamigos\fileinput\FileInput;
 
 
 /* @var $this yii\web\View */
@@ -20,7 +21,16 @@ use app\models\Users;
 
     <?= $form->field($model, 'tipo')->textInput(['maxlength' => 50]) ?>
 
-    <?= $form->field($model, 'url_doc')->textInput(['maxlength' => 250]) ?>
+    <?= $form->field($model, 'url_doc')->widget(\dosamigos\fileinput\BootstrapFileInput::className(), [
+      'options' => ['accept' => '*', 'multiple' => False],
+      'clientOptions' => [
+        'previewFileType' => 'text',
+        'browseClass' => 'btn btn-success',
+        'uploadClass' => 'btn btn-info',
+        'removeClass' => 'btn btn-danger',
+        'removeIcon' => '<i class="glyphicon glyphicon-trash"></i> '
+        ]
+        ]);?>
 
     <?= $form->field($model, 'descripcion')->textInput(['maxlength' => 250]) ?>
 
