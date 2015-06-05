@@ -18,8 +18,8 @@ public class UserFunctions {
 	
 	private JSONParser jsonParser;
 	
-	private static String loginURL = "http://i3soluciones.com/edukt/api2/";
-	private static String registerURL = "http://i3soluciones.com/edukt/api2/";
+	private static String loginURL = "http://10.0.2.2/api2/";
+	private static String registerURL = "http://10.0.2.2/api2/";
     //private static String loginURL = "http://i3soluciones.com/api_edukt/";
     //private static String registerURL = "http://i3soluciones.com/api_edukt/";
 	
@@ -54,13 +54,15 @@ public class UserFunctions {
 	 * @param email
 	 * @param password
 	 * */
-	public JSONObject registerUser(String name, String email, String password){
+	public JSONObject registerUser(String name, String email, String password, String cedula, String spinner){
 		// Building Parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", register_tag));
 		params.add(new BasicNameValuePair("name", name));
 		params.add(new BasicNameValuePair("email", email));
 		params.add(new BasicNameValuePair("password", password));
+		params.add(new BasicNameValuePair("cedula", cedula));
+		params.add(new BasicNameValuePair("spinner", spinner));
 		
 		// getting JSON Object
 		JSONObject json = jsonParser.getJSONFromUrl(registerURL, params);

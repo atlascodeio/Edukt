@@ -2,13 +2,13 @@ package ve.ula.edukt_mobile.data;
 
 public class FeedItem {
 	private int id;
-	private String name, status, image, profilePic, timeStamp, url, email;
+	private String name, status, image, profilePic, timeStamp, url, email, nombre;
 
 	public FeedItem() {
 	}
 
 	public FeedItem(int id, String name, String image, String status,
-					String profilePic, String timeStamp, String url, String email) {
+					String profilePic, String timeStamp, String url, String email, String nombre) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -18,6 +18,7 @@ public class FeedItem {
 		this.timeStamp = timeStamp;
 		this.url = url;
 		this.email = email;
+		this.nombre = nombre;
 	}
 
 	public int getId() {
@@ -82,5 +83,13 @@ public class FeedItem {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 }

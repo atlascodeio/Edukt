@@ -1,6 +1,7 @@
 package ve.ula.edukt_mobile;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -126,6 +127,10 @@ public class TimeLineFragment extends Fragment {
             }
 
         } else {
+
+            final ProgressDialog pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage(getString(R.string.progress_dialog));
+            pDialog.show();
             // making fresh volley request and getting json
             JsonObjectRequest jsonReq = new JsonObjectRequest(Method.GET,
                     URL_FEED, null, new Response.Listener<JSONObject>() {
@@ -134,6 +139,7 @@ public class TimeLineFragment extends Fragment {
                 public void onResponse(JSONObject response) {
                     VolleyLog.d(TAG, "Response: " + response.toString());
                     if (response != null) {
+                        pDialog.hide();
                         parseJsonFeed(response);
 
                     }
@@ -143,6 +149,7 @@ public class TimeLineFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    pDialog.hide();
                 }
             });
 
@@ -180,6 +187,11 @@ public class TimeLineFragment extends Fragment {
                 String feedUrl = feedObj.isNull("url") ? null : feedObj
                         .getString("url");
                 item.setUrl(feedUrl);
+
+                // nombre might be null sometimes
+                String nombre = feedObj.isNull("nombre") ? null : feedObj
+                        .getString("nombre");
+                item.setNombre(nombre);
 
                 feedItems.add(item);
             }

@@ -30,6 +30,33 @@
             android:id="@+id/registerEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+
+        <!--  Cedula Label -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:text="Cedula" />
+        <!--  Cedula TextField -->
+        <EditText
+            android:id="@+id/registerCedula"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+        <!--  Universidad Label -->
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dip"
+            android:text="Universidad" />
+
+        <!--  Universidad Spinner -->
+        <Spinner
+            android:id="@+id/registerUniversidad"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/spinner_prompt"/>
         
 		<!--  Password Label -->
         <TextView

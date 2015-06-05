@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Edukt</string>
+    <string name="app_name">edukt_mobile</string>
 
     <!-- Drawer menu options -->
-    <string name="title_section1">Recientes</string>
+    <string name="title_section1">Timeline</string>
+    <string name="title_section2">Recientes</string>
     <string name="title_section3">Documentos</string>
     <string name="title_section4">Notificaciones</string>
     <string name="title_section5">Profesores</string>
@@ -15,6 +16,8 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="progress_dialog">Cargando...</string>
+    <string name="spinner_prompt">Seleccione</string>
 
     <!-- Login -->
     <string name="hello">Hello World, AndroidDashboard!</string>
@@ -40,11 +43,18 @@
     <string name="title_activity_dashboard2">Edukt - Timeline</string>
 
     <!-- Urls String -->
-    <string name="url_json_gettimeline">http://i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-timeline</string>
-    <string name="url_json_getteachers">http://i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-teachers</string>
-    <string name="url_json_getnotifications">http://i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-notifications</string>
-    <string name="url_json_getdocuments">http://i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-documents</string>
-    <string name="url_json_getmyaccount">http://i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-my-account</string>
+    <string name="url_json_gettimeline">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-timeline</string>
+    <string name="url_json_getteachers">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-teachers</string>
+    <string name="url_json_getnotifications">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-notifications</string>
+    <string name="url_json_getdocuments">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-documents</string>
+    <string name="url_json_getmyaccount">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-my-account</string>
+    <string name="url_json_getuniversidades">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-universidades</string>
+
+    <!-- myAccount -->
+    <string name="account_name">Nombre:</string>
+    <string name="account_email">Email:</string>
+    <string name="account_cedula">Cedula:</string>
+    <string name="account_universidad">Universidad:</string>
 
 
 

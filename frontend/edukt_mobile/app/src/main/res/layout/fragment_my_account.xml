@@ -1,37 +1,128 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="ve.ula.edukt_mobile.MyAccountFragment">
+    android:layout_height="match_parent" tools:context="ve.ula.edukt_mobile.MyAccountFragment"
+    android:background="@color/app_bg">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:paddingLeft="@dimen/feed_item_padding_left_right"
-        android:paddingRight="@dimen/feed_item_padding_left_right" >
+
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/profilePic"
-            android:layout_width="@dimen/feed_item_profile_pic"
-            android:layout_height="@dimen/feed_item_profile_pic"
-            android:scaleType="fitCenter" >
+            android:layout_width="@dimen/feed_item_profile_pic_big"
+            android:layout_height="@dimen/feed_item_profile_pic_big"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="@dimen/feed_item_status_pad_top" >
         </com.android.volley.toolbox.NetworkImageView>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/feed_item_profile_info_padd" >
-
-        <TextView
-            android:id="@+id/name"
+        <LinearLayout
+            android:id="@+id/linear1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/feed_item_profile_name"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/feed_item_profile_info_padd"
+            android:layout_below="@+id/profilePic"
+            android:paddingTop="@dimen/feed_item_status_pad_top" >
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/account_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:textStyle="bold"
+                android:text="@string/account_name" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:paddingLeft="@dimen/feed_item_profile_info_padd" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/feed_item_profile_info_padd"
+            android:layout_below="@+id/linear1" >
+
+            <TextView
+                android:id="@+id/account_cedula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:textStyle="bold"
+                android:text="@string/account_cedula" />
+            <TextView
+                android:id="@+id/cedula"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:paddingLeft="@dimen/feed_item_profile_info_padd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/feed_item_profile_info_padd"
+            android:layout_below="@+id/linear2" >
+
+            <TextView
+                android:id="@+id/account_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:textStyle="bold"
+                android:text="@string/account_email" />
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:paddingLeft="@dimen/feed_item_profile_info_padd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/feed_item_profile_info_padd"
+            android:layout_below="@+id/linear3" >
+
+            <TextView
+                android:id="@+id/account_universidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:textStyle="bold"
+                android:text="@string/account_universidad" />
+            <TextView
+                android:id="@+id/universidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:paddingLeft="@dimen/feed_item_profile_info_padd" />
+
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
 
 </FrameLayout>

@@ -128,6 +128,12 @@ public class FeedListAdapter extends BaseAdapter {
 			other1.setText(item.getEmail());
 		}
 
+		// Chcek for empty status message
+		if (item.getNombre() != null) {
+			url.setText(Html.fromHtml("<a href=\"" + item.getUrl() + "\">"
+					+ item.getNombre() + "</a> "));
+		}
+
 
 		return convertView;
 	}

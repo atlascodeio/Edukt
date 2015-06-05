@@ -1,6 +1,7 @@
 package ve.ula.edukt_mobile;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ve.ula.edukt_mobile.app.AppController;
+import ve.ula.edukt_mobile.library.DatabaseHandler;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +29,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
 
 
 /**
@@ -86,6 +91,20 @@ public class MyAccountFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_my_account, container, false);
 
+        //Search the loggeed user in sqlite database
+        DatabaseHandler db = new DatabaseHandler(getActivity().getBaseContext());
+        HashMap user = db.getUserDetails();
+        final String user_uid = (String) user.get("uid");
+
+        //prepare the json object for send uid
+        JSONObject json= new JSONObject();
+        try {
+            json.put("id", user_uid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         // We first check for cached request
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
         Entry entry = cache.get(URL_FEED);
@@ -104,14 +123,19 @@ public class MyAccountFragment extends Fragment {
             }
 
         } else {
+
+            final ProgressDialog pDialog = new ProgressDialog(getActivity());
+            pDialog.setMessage(getString(R.string.progress_dialog));
+            pDialog.show();
             // making fresh volley request and getting json
-            JsonObjectRequest jsonReq = new JsonObjectRequest(Method.GET,
-                    URL_FEED, null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsonReq = new JsonObjectRequest(Method.POST,
+                    URL_FEED, json, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
                     VolleyLog.d(TAG, "Response: " + response.toString());
                     if (response != null) {
+                        pDialog.hide();
                         parseJsonFeed(response, view);
 
                     }
@@ -121,6 +145,7 @@ public class MyAccountFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    pDialog.hide();
                 }
             });
 
@@ -137,8 +162,14 @@ public class MyAccountFragment extends Fragment {
     private void parseJsonFeed(JSONObject response, View view) {
         try {
 
-                TextView name = (TextView) view.findViewById(R.id.name);
-                name.setText(response.getString("name"));
+            TextView name = (TextView) view.findViewById(R.id.name);
+            name.setText(response.getString("name"));
+            TextView email = (TextView) view.findViewById(R.id.email);
+            email.setText(response.getString("email"));
+            TextView cedula = (TextView) view.findViewById(R.id.cedula);
+            cedula.setText(response.getString("cedula"));
+            TextView universidad = (TextView) view.findViewById(R.id.universidad);
+            universidad.setText(response.getString("status"));
 
 
 
