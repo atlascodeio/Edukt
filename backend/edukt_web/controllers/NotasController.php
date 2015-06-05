@@ -88,7 +88,7 @@ class NotasController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             // Funcion de colocar la fecha de actualización
             $model->updated_at = new Expression("NOW()");
-            $model->save();
+            $model->save(false);
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
             return $this->render('update', [

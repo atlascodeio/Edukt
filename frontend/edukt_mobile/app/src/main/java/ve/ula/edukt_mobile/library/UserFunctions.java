@@ -18,8 +18,8 @@ public class UserFunctions {
 	
 	private JSONParser jsonParser;
 	
-	private static String loginURL = "http://10.0.2.2/api2/";
-	private static String registerURL = "http://10.0.2.2/api2/";
+	private static String loginURL = "http://i3soluciones.com/edukt/api2/";
+	private static String registerURL = "http://i3soluciones.com/edukt/api2/";
     //private static String loginURL = "http://i3soluciones.com/api_edukt/";
     //private static String registerURL = "http://i3soluciones.com/api_edukt/";
 	

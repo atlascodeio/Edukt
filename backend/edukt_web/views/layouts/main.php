@@ -8,6 +8,8 @@ use app\assets\AppAsset;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -36,12 +38,21 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     //['label' => 'Inicio', 'url' => ['/site/index']],
-                    ['label' => 'Usuarios', 'url' => ['/users/index']],
-                    ['label' => 'Universidad', 'url' => ['/universidad/index']],
+                    //['label' => 'Usuarios', 'url' => ['/users/index']],
+                    //['label' => 'Universidad', 'url' => ['/universidad/index']],
                     ['label' => 'Mensajes', 'url' => ['/notas/index']],
                     ['label' => 'Documentos', 'url' => ['/docs/index']],
                     //['label' => 'Acerca de', 'url' => ['/site/about']],
                     //['label' => 'Contactenos', 'url' => ['/site/contact']],
+
+                    [
+                      'label' => 'Administrar',
+                      'items' => [
+                        ['label' => 'Usuarios', 'url' => ['/users/index']],
+                        '<li class="divider"></li>',
+                        ['label' => 'Universidades', 'url' => ['/universidad/index']],
+                      ],
+                    ],
 
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/site/login']] :
