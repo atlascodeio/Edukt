@@ -53,12 +53,12 @@
     <string name="url_json_getdocuments">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-documents</string>
     <string name="url_json_getmyaccount">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-my-account</string>
     <string name="url_json_getuniversidades">http://10.0.2.2/edukt_web/web/index.php?r=json-resp/get-my-account</string>-->
-    <string name="url_json_gettimeline">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-timeline</string>
-    <string name="url_json_getteachers">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-teachers</string>
-    <string name="url_json_getnotifications">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-notifications</string>
-    <string name="url_json_getdocuments">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-documents</string>
-    <string name="url_json_getmyaccount">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-my-account</string>
-    <string name="url_json_getuniversidades">http://www.i3soluciones.com/edukt/edukt_web/web/index.php?r=json-resp/get-universidades</string>
+    <string name="url_json_gettimeline">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/get-timeline</string>
+    <string name="url_json_getteachers">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/get-teachers</string>
+    <string name="url_json_getnotifications">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/get-notifications</string>
+    <string name="url_json_getdocuments">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/get-documents</string>
+    <string name="url_json_getmyaccount">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/get-my-account</string>
+    <string name="url_json_getuniversidades">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/get-universidades</string>
 
     <!-- myAccount -->
     <string name="account_name">Nombre:</string>
