@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\web\UrlManager;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -36,31 +37,57 @@ AppAsset::register($this);
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-                    //['label' => 'Inicio', 'url' => ['/site/index']],
-                    //['label' => 'Usuarios', 'url' => ['/users/index']],
-                    //['label' => 'Universidad', 'url' => ['/universidad/index']],
-                    ['label' => 'Mensajes', 'url' => ['/notas/index']],
-                    ['label' => 'Documentos', 'url' => ['/docs/index']],
-                    //['label' => 'Acerca de', 'url' => ['/site/about']],
-                    //['label' => 'Contactenos', 'url' => ['/site/contact']],
-
-                    [
-                      'label' => 'Administrar',
-                      'items' => [
-                        ['label' => 'Usuarios', 'url' => ['/users/index']],
-                        '<li class="divider"></li>',
-                        ['label' => 'Universidades', 'url' => ['/universidad/index']],
-                      ],
-                    ],
-
-                    Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
-                ],
             ]);
+
+
+
+            $menuItems = [
+              ['label' => 'Mensajes', 'url' => ['/notas/index']],
+              ['label' => 'Documentos', 'url' => ['/docs/index']],
+              ['label' => 'Administrar', 'items' => [
+                  ['label' => 'Usuarios', 'url' => ['/users/index']],
+                  '<li class="divider"></li>',
+                  ['label' => 'Universidades', 'url' => ['/universidad/index']],
+                ],
+              ],
+
+            ];
+
+            $menuItemsLog = [
+              ['label' => 'Login', 'url' => ['/user/login']],
+            ];
+            if (Yii::$app->user->isGuest) {
+
+              echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-right'],
+                'items' => $menuItemsLog,
+                ]);
+
+
+
+            } else {
+              $menuItems[] = [
+                'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                'url' => ['/user/logout'],
+                'linkOptions' => ['data-method' => 'post']
+              ];
+
+              echo Nav::widget([
+                'options' => ['class' => 'navbar-nav navbar-right'],
+                'items' => $menuItems,
+                ]);
+
+            }
+
+
+
+
+
+
+
+
+
+
             NavBar::end();
         ?>
 
