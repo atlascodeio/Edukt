@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/app_bg">
+    android:background="@color/app_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -72,13 +75,29 @@
             android:hint="@string/password_confirm"
             android:paddingBottom="20dip" />
 
-        <Spinner
-            android:id="@+id/registerUniversidad"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/spinner_prompt"
-            android:spinnerMode="dialog"
-            android:labelFor="@string/spinner_prompt" />
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/labelUniversidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/hint"
+                android:textColor="#cccccc"
+                android:text="Seleccione su universidad"
+                android:textSize="18dp"
+                android:paddingLeft="4dp"
+                />
+
+            <Spinner
+                android:id="@+id/registerUniversidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:prompt="@string/spinner_prompt"
+                android:labelFor="@string/spinner_prompt"
+                android:paddingLeft="20dp" />
+        </LinearLayout>
 
         <TextView android:id="@+id/register_error"
             		android:layout_width="fill_parent"
@@ -87,22 +106,37 @@
             		android:padding="10dip"
             		android:textStyle="bold"/>
 
-		<!--  Login Button -->        
-        <Button
-            android:id="@+id/btnRegister"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:text="Registrarse"
-            android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="center_horizontal">
 
-        <!--  Link to Login Screen -->
-        <Button
-            android:id="@+id/btnLinkToLoginScreen"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:text="Ya se encuenta registrado? ingrese aqui!" />
+            <!-- Login Button -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/button_color"
+                card_view:cardCornerRadius="@dimen/raised_radius"
+                android:layout_margin="@dimen/raised_margin"
+                card_view:cardElevation="@dimen/raised_elevation">
+
+                <TextView android:id="@+id/btnRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/raised_padding1"
+                    android:paddingBottom="@dimen/raised_padding1"
+                    android:paddingLeft="@dimen/raised_padding2"
+                    android:paddingRight="@dimen/raised_padding2"
+                    android:textColor="@color/text_color_main"
+                    android:text="@string/button_guardar"
+                    android:textSize="@dimen/raised_text_size"/>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
     </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

@@ -6,29 +6,22 @@
     tools:context=".MainActivity"
     android:background="@color/app_bg">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:weightSum="1"
         android:padding="10dp"
-        android:id="@+id/relative"
         android:minHeight="500dp">
-		<!--  View Title Label -->
-        <!--  Email Label -->
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:background="@drawable/splash_small"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="22dp" />
 
         <!--  Email TextField -->
-        <TextView android:id="@+id/login_error"
-            		android:layout_width="fill_parent"
-            		android:layout_height="wrap_content"
-            		android:textColor="#e30000"
-            android:textStyle="bold"
-            android:enabled="true"
-            android:gravity="center_vertical"
-            android:layout_below="@+id/loginPassword"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="8dp" />
-
         <EditText
             android:id="@+id/loginEmail"
             android:layout_width="fill_parent"
@@ -36,60 +29,83 @@
             android:textColor="#ffffff"
             android:textColorHint="#ffcccccc"
             android:hint="@string/email_hint"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="false"
-            android:layout_marginTop="49dp"
-            android:layout_below="@+id/imageView" />
-        
-		<!--  Password Label -->
+            android:layout_marginTop="49dp" />
+
         <!--  Password TextField -->
         <EditText
             android:id="@+id/loginPassword"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:password="true"
             android:textColor="#ffffff"
             android:textColorHint="#ffcccccc"
             android:hint="@string/password"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/btnLogin"
-            android:layout_below="@+id/loginEmail" />
-        
-        <!--  Error message -->
+            android:background="@null"/>
 
-        <!--  Login Button -->
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/login_btn"
-            android:textColor="#ff000000"
+        <!--  LoginError TextField -->
+        <TextView android:id="@+id/login_error"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#e30000"
             android:textStyle="bold"
-            android:layout_gravity="right|center"
-            android:layout_alignTop="@+id/loginPassword"
-            android:layout_alignParentRight="true" />
+            android:enabled="true"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="8dp" />
 
-        <!--  Link to Registration Screen -->
-        <Button
-            android:id="@+id/btnLinkToRegisterScreen"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login_crear"
-            android:textColor="#ff000000"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/login_error"
-            android:layout_alignParentLeft="true" />
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:gravity="center_horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:background="@drawable/splash_small"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="22dp" />
+            <!-- Login Button -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/button_color"
+                card_view:cardCornerRadius="@dimen/raised_radius"
+                android:layout_margin="@dimen/raised_margin"
+                card_view:cardElevation="@dimen/raised_elevation">
 
-    </RelativeLayout>
+                <TextView android:id="@+id/btnLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/raised_padding1"
+                    android:paddingBottom="@dimen/raised_padding1"
+                    android:paddingLeft="@dimen/raised_padding2"
+                    android:paddingRight="@dimen/raised_padding2"
+                    android:textColor="@color/text_color_main"
+                    android:text="@string/login_btn"
+                    android:textSize="@dimen/raised_text_size"/>
 
+            </android.support.v7.widget.CardView>
+
+            <!-- Registrarse Button -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/button_color"
+                card_view:cardCornerRadius="@dimen/raised_radius"
+                android:layout_margin="@dimen/raised_margin"
+                card_view:cardElevation="@dimen/raised_elevation">
+
+            <TextView android:id="@+id/btnLinkToRegisterScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/raised_padding1"
+                android:paddingBottom="@dimen/raised_padding1"
+                android:paddingLeft="@dimen/raised_padding2"
+                android:paddingRight="@dimen/raised_padding2"
+                android:textColor="@color/text_color_main"
+                android:text="@string/login_crear"
+                android:textSize="@dimen/raised_text_size"/>
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

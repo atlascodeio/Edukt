@@ -33,7 +33,7 @@
     <string name="action_about">Acerca de...</string>
     <string name="action_version">V1.0</string>
     <string name="login_message">Ingrese sus datos de acceso</string>
-    <string name="login_crear">Crear cuenta nueva?</string>
+    <string name="login_crear">Registrarse</string>
     <string name="email_hint">sucorreo@mail.com</string>
     <string name="nombre_completo">Nombre y apellido</string>
     <string name="cedula">Cédula Ej: 18272737</string>
@@ -66,7 +66,15 @@
     <string name="account_cedula">Cedula:</string>
     <string name="account_universidad">Universidad:</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_notifications">NotificationsActivity</string>
 
+    <!-- Notifications -->
+    <string name="hint_notifications_title">Ingrese el titulo del mensaje:</string>
+    <string name="hint_notifications_bar_title">Redactar mensaje</string>
+    <string name="hint_notifications_descripcion">Ingrese el cuerpo del mensaje:</string>
 
+    <!-- Buttons -->
+    <string name="button_guardar">Guardar</string>
+    <string name="button_volver">Volver</string>
 
 </resources>

@@ -6,7 +6,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,9 +40,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterActivity extends Activity {
-	Button btnRegister;
-	Button btnLinkToLogin;
+public class RegisterActivity extends ActionBarActivity {
+	TextView btnRegister;
+	TextView btnLinkToLogin;
 	EditText inputFullName;
 	EditText inputEmail;
 	EditText inputPassword;
@@ -74,13 +78,25 @@ public class RegisterActivity extends Activity {
             StrictMode.setThreadPolicy(policy);
         }
 
+		//Set the title toolbar
+		TextView titletoolbar = (TextView) findViewById(R.id.titletoolbar);
+		titletoolbar.setText(getString(R.string.login_crear));
+
+		// Set a toolbar which will replace the action bar.
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		//Hide actionbar title (substituted by toolbar)
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 		// Importing all assets like buttons, text fields
 		inputFullName = (EditText) findViewById(R.id.registerName);
 		inputEmail = (EditText) findViewById(R.id.registerEmail);
 		inputPassword = (EditText) findViewById(R.id.registerPassword);
 		inputCedula = (EditText) findViewById(R.id.registerCedula);
-		btnRegister = (Button) findViewById(R.id.btnRegister);
-		btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+		btnRegister = (TextView) findViewById(R.id.btnRegister);
+		//btnLinkToLogin = (TextView) findViewById(R.id.btnLinkToLoginScreen);
 		registerErrorMsg = (TextView) findViewById(R.id.register_error);
 
 		inputSpinner = (Spinner) findViewById(R.id.registerUniversidad);
@@ -160,7 +176,7 @@ public class RegisterActivity extends Activity {
 		});
 
 		// Link to Login Screen
-		btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
+		/*btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
 				Intent i = new Intent(getApplicationContext(),
@@ -169,7 +185,14 @@ public class RegisterActivity extends Activity {
 				// Close Registration View
 				finish();
 			}
-		});
+		});*/
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.global, menu);
+		return true;
 	}
 
 
@@ -188,7 +211,7 @@ public class RegisterActivity extends Activity {
 			}
 
 			ArrayAdapter<Universidad> dataAdapter = new ArrayAdapter<Universidad>(this,
-					android.R.layout.simple_spinner_item, list);
+					R.layout.spinner_item, list);
 			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			//on item select listener
 			inputSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -207,4 +230,21 @@ public class RegisterActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+
+		//noinspection SimplifiableIfStatement
+		if (id == R.id.action_settings) {
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
 }

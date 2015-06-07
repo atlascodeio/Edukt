@@ -13,4 +13,6 @@
     <color name="app_bg_selected">#ecf0f1</color>
     <color name="register">#ffffff</color>
     <color name="hint">#cccccc</color>
+    <color name="button_color">#3498db</color>
+    <color name="text_color_main">#ffffff</color>
 </resources>

@@ -20,4 +20,27 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+
+
+    <ve.ula.edukt_mobile.library.FloatingActionButton
+        android:id="@+id/fab_2"
+        android:layout_width="@dimen/fab_size_small"
+        android:layout_height="@dimen/fab_size_small"
+        android:layout_marginTop="128dp"
+        android:elevation="@dimen/fab_elevation"
+        android:background="@color/button_color"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:layout_width="@dimen/fab_icon_size"
+            android:layout_height="@dimen/fab_icon_size"
+            android:src="@drawable/ic_add"
+            android:layout_gravity="center"
+            android:duplicateParentState="true" />
+
+    </ve.ula.edukt_mobile.library.FloatingActionButton>
+
+
 </FrameLayout>

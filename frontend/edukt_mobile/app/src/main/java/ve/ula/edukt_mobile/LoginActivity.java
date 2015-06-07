@@ -20,8 +20,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends Activity {
-	Button btnLogin;
-	Button btnLinkToRegister;
+	//Button btnLogin;
+    TextView btnLogin;
+	TextView btnLinkToRegister;
 	EditText inputEmail;
 	EditText inputPassword;
 	TextView loginErrorMsg;
@@ -54,8 +55,9 @@ public class LoginActivity extends Activity {
 		// Importing all assets like buttons, text fields
 		inputEmail = (EditText) findViewById(R.id.loginEmail);
 		inputPassword = (EditText) findViewById(R.id.loginPassword);
-		btnLogin = (Button) findViewById(R.id.btnLogin);
-		btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+		//btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin = (TextView) findViewById(R.id.btnLogin);
+		btnLinkToRegister = (TextView) findViewById(R.id.btnLinkToRegisterScreen);
 		loginErrorMsg = (TextView) findViewById(R.id.login_error);
 
 		// Login button Click Event
@@ -120,10 +122,9 @@ public class LoginActivity extends Activity {
 		btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View view) {
-				Intent i = new Intent(getApplicationContext(),
-						RegisterActivity.class);
+				Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
 				startActivity(i);
-				finish();
+				//finish();
 			}
 		});
 	}

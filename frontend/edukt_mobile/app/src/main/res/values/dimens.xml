@@ -21,4 +21,19 @@
     <dimen name="feed_item_corner_radius">3dp</dimen>
     <dimen name="feed_item_border_width">1dp</dimen>
 
+    <!-- Floating action button -->
+    <dimen name="fab_elevation">8dp</dimen>
+    <dimen name="fab_press_translation_z">9dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="fab_size_small">50dp</dimen>
+    <dimen name="fab_icon_size">28dp</dimen>
+
+    <!-- Raised button -->
+    <dimen name="raised_radius">2dp</dimen>
+    <dimen name="raised_margin">6dp</dimen>
+    <dimen name="raised_elevation">6dp</dimen>
+    <dimen name="raised_padding1">8.5dp</dimen>
+    <dimen name="raised_padding2">12dp</dimen>
+    <dimen name="raised_text_size">17dp</dimen>
+
 </resources>
