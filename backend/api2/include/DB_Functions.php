@@ -27,7 +27,7 @@ class DB_Functions {
         $hash = $this->hashSSHA($password);
         $encrypted_password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"]; // salt
-        $result = mysql_query("INSERT INTO users(unique_id, name, email, encrypted_password, salt, created_at, cedula, universidad_id) VALUES('$uuid', '$name', '$email', '$encrypted_password', '$salt', NOW(), $cedula, $spinner)");
+        $result = mysql_query("INSERT INTO users(unique_id, name, email, encrypted_password, salt, created_at, cedula, universidad_id, tipo_user) VALUES('$uuid', '$name', '$email', '$encrypted_password', '$salt', NOW(), $cedula, $spinner, 'Alumno')");
         // check for successful store
         if ($result) {
             // get user details 
