@@ -2,7 +2,10 @@ package ve.ula.edukt_mobile;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -106,12 +109,26 @@ public class TimeLineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_time_line, container, false);
         listView = (ListView) view.findViewById(R.id.list);
         feedItems = new ArrayList<FeedItem>();
         listAdapter = new FeedListAdapter(getActivity(), feedItems, "Timeline");
         listView.setAdapter(listAdapter);
+
+        //Define the click floating button action from API = 14 ice cream sandwich to android 5 lollipop
+        if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)){
+            FloatingActionButton myFab = (FloatingActionButton)  view.findViewById(R.id.fab_2);
+            myFab.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), NotificationsActivity.class);
+                    getActivity().startActivity(intent);
+                }
+            });
+        }
+
+
 
         // We first check for cached request
         Cache cache = AppController.getInstance().getRequestQueue().getCache();

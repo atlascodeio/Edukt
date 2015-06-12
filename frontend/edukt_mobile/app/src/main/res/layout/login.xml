@@ -59,7 +59,29 @@
             android:padding="10dp"
             android:gravity="center_horizontal">
 
+            <!-- Login Button -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:cardBackgroundColor="@color/button_color"
+                card_view:cardCornerRadius="@dimen/raised_radius"
+                android:layout_margin="@dimen/raised_margin"
+                card_view:cardElevation="@dimen/raised_elevation">
 
+                <TextView android:id="@+id/btnLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/raised_padding1"
+                    android:paddingBottom="@dimen/raised_padding1"
+                    android:paddingLeft="@dimen/raised_padding2"
+                    android:paddingRight="@dimen/raised_padding2"
+                    android:textColor="@color/text_color_main"
+                    android:text="@string/login_btn"
+                    android:textSize="@dimen/raised_text_size"/>
+
+            </android.support.v7.widget.CardView>
 
             <!-- Registrarse Button -->
             <android.support.v7.widget.CardView
@@ -82,31 +104,6 @@
                 android:textColor="@color/text_color_main"
                 android:text="@string/login_crear"
                 android:textSize="@dimen/raised_text_size"/>
-
-
-
-            </android.support.v7.widget.CardView>
-            <!-- Login Button -->
-            <android.support.v7.widget.CardView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                card_view:cardBackgroundColor="@color/button_color"
-                card_view:cardCornerRadius="@dimen/raised_radius"
-                android:layout_margin="@dimen/raised_margin"
-                card_view:cardElevation="@dimen/raised_elevation">
-
-                <TextView android:id="@+id/btnLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/raised_padding1"
-                    android:paddingBottom="@dimen/raised_padding1"
-                    android:paddingLeft="@dimen/raised_padding2"
-                    android:paddingRight="@dimen/raised_padding2"
-                    android:textColor="@color/text_color_main"
-                    android:text="@string/login_btn"
-                    android:textSize="@dimen/raised_text_size"/>
 
             </android.support.v7.widget.CardView>
         </LinearLayout>
