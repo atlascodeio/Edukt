@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import com.android.volley.Cache;
 import com.android.volley.Cache.Entry;
@@ -69,7 +70,8 @@ public class TimeLineFragment extends Fragment {
     private String URL_FEED;
 
     private SwipeRefreshLayout swipeContainer;
-    private ProgressDialog pDialog;
+    //For handle the circle progress bar showing
+    private CircleProgressBar circle_progress_bar;
 
 
     /**
@@ -149,9 +151,12 @@ public class TimeLineFragment extends Fragment {
 
         } else {
 
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage(getString(R.string.progress_dialog));
-            pDialog.show();
+            circle_progress_bar = (CircleProgressBar) view.findViewById(R.id.circle_progress_bar);
+            circle_progress_bar.setColorSchemeResources(android.R.color.holo_green_light,android.R.color.holo_orange_light,android.R.color.holo_red_light);
+            circle_progress_bar.setVisibility(View.VISIBLE);
+
+
+
             fecthData();
         }
 
@@ -188,8 +193,9 @@ public class TimeLineFragment extends Fragment {
                 VolleyLog.d(TAG, "Response: " + response.toString());
                 if (response != null) {
                     swipeContainer.setRefreshing(false);
-                    pDialog.hide();
-                    listAdapter.clear();
+                    //pDialog.hide();
+                    //listAdapter.clear();
+                    circle_progress_bar.setVisibility(View.INVISIBLE);
                     parseJsonFeed(response);
 
                 }
@@ -199,7 +205,7 @@ public class TimeLineFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                pDialog.hide();
+                circle_progress_bar.setVisibility(View.INVISIBLE);
             }
         });
 

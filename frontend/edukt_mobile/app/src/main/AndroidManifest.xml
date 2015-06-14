@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ve.ula.edukt_mobile" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="ve.ula.edukt_mobile">
 
     <!-- Allow to connect with internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk tools:overrideLibrary="com.lsjwzh.widget.materialloadingprogressbar"/>
 
     <application
         android:name=".app.AppController"

@@ -77,4 +77,6 @@
     <string name="button_guardar">Guardar</string>
     <string name="button_volver">Volver</string>
 
+    <string name="password_font">sans-serif</string>
+
 </resources>
