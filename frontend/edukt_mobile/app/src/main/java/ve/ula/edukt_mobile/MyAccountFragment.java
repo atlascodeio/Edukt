@@ -2,6 +2,8 @@ package ve.ula.edukt_mobile;
 
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -30,6 +32,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 
 /**
@@ -49,6 +52,8 @@ public class MyAccountFragment extends Fragment {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private String URL_FEED;
+    //For handle the circle progress bar showing
+    private CircleProgressBar circle_progress_bar;
 
 
     /**
@@ -91,6 +96,10 @@ public class MyAccountFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_my_account, container, false);
 
+        //Define the progress bar
+        circle_progress_bar = (CircleProgressBar) view.findViewById(R.id.circle_progress_bar);
+        circle_progress_bar.setColorSchemeResources(android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+
         //Search the loggeed user in sqlite database
         DatabaseHandler db = new DatabaseHandler(getActivity().getBaseContext());
         HashMap user = db.getUserDetails();
@@ -124,9 +133,8 @@ public class MyAccountFragment extends Fragment {
 
         } else {
 
-            final ProgressDialog pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage(getString(R.string.progress_dialog));
-            pDialog.show();
+            //show circle progress bar
+            circle_progress_bar.setVisibility(View.VISIBLE);
             // making fresh volley request and getting json
             JsonObjectRequest jsonReq = new JsonObjectRequest(Method.POST,
                     URL_FEED, json, new Response.Listener<JSONObject>() {
@@ -135,7 +143,7 @@ public class MyAccountFragment extends Fragment {
                 public void onResponse(JSONObject response) {
                     VolleyLog.d(TAG, "Response: " + response.toString());
                     if (response != null) {
-                        pDialog.hide();
+                        circle_progress_bar.setVisibility(View.INVISIBLE);
                         parseJsonFeed(response, view);
 
                     }
@@ -145,7 +153,7 @@ public class MyAccountFragment extends Fragment {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
-                    pDialog.hide();
+                    circle_progress_bar.setVisibility(View.INVISIBLE);
                 }
             });
 
@@ -171,44 +179,11 @@ public class MyAccountFragment extends Fragment {
             TextView universidad = (TextView) view.findViewById(R.id.universidad);
             universidad.setText(response.getString("status"));
 
-
-
-
             // user profile pic
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
             NetworkImageView profilePic = (NetworkImageView) view.findViewById(R.id.profilePic);
-
-            if(!response.isNull("url"))
-                profilePic.setImageUrl(response.getString("profilePic"), imageLoader);
-            else
-                profilePic.setDefaultImageResId(R.drawable.profile);
-                /*JSONObject feedObj = (JSONObject) feedArray.get(i);
-
-                FeedItem item = new FeedItem();
-                item.setId(feedObj.getInt("id"));
-                item.setName(feedObj.getString("name"));
-
-                // Image might be null sometimes
-                String image = feedObj.isNull("image") ? null : feedObj
-                        .getString("image");
-                item.setImge(image);
-                item.setStatus(feedObj.getString("status"));
-                item.setProfilePic(feedObj.getString("profilePic"));
-
-                // url might be null sometimes
-                String feedUrl = feedObj.isNull("url") ? null : feedObj
-                        .getString("url");
-                item.setUrl(feedUrl);
-
-                //timeStamp might be null sometimes
-                String timeStamp = feedObj.isNull("timeStamp") ? null : feedObj.getString("timeStamp");
-                item.setTimeStamp(timeStamp);
-
-                //Email in module teachers
-                item.setEmail(feedObj.getString("email"));
-*/
-
-
+             profilePic.setDefaultImageResId(R.drawable.profile);
+            profilePic.setImageUrl(response.getString("profilePic"), imageLoader);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -2,7 +2,9 @@ package ve.ula.edukt_mobile;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import ve.ula.edukt_mobile.adapter.FeedListAdapter;
 import ve.ula.edukt_mobile.app.AppController;
 import ve.ula.edukt_mobile.data.FeedItem;
+import ve.ula.edukt_mobile.library.SwipeRefresh;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 
 /**
@@ -51,6 +55,9 @@ public class DocumentsFragment extends Fragment {
     private FeedListAdapter listAdapter;
     private List<FeedItem> feedItems;
     private String URL_FEED;
+    //For handle the circle progress bar showing
+    private CircleProgressBar circle_progress_bar;
+    private SwipeRefresh swipeRefresh;
 
 
     /**
@@ -98,10 +105,31 @@ public class DocumentsFragment extends Fragment {
         listAdapter = new FeedListAdapter(getActivity(), feedItems, "Timeline");
         listView.setAdapter(listAdapter);
 
+        //Prepare the swipe refresh action
+        try {
+            swipeRefresh = new SwipeRefresh(view, (Object) this, DocumentsFragment.class.getMethod("fetchData"));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        //Define the progress bar
+        circle_progress_bar = (CircleProgressBar) view.findViewById(R.id.circle_progress_bar);
+        circle_progress_bar.setColorSchemeResources(android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+
+        //Define the click floating action button
+        FloatingActionButton myFab = (FloatingActionButton)  view.findViewById(R.id.add_documents);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //Intent intent = new Intent(getActivity(), NotificationsActivity.class);
+                //getActivity().startActivity(intent);
+            }
+        });
+
+
         // We first check for cached request
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
         Entry entry = cache.get(URL_FEED);
-        if (entry != null && !(entry.isExpired())) {
+        if (entry != null) {
             // fetch the data from cache
             try {
                 String data = new String(entry.data, "UTF-8");
@@ -117,36 +145,45 @@ public class DocumentsFragment extends Fragment {
 
         } else {
 
-            final ProgressDialog pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage(getString(R.string.progress_dialog));
-            pDialog.show();
-            // making fresh volley request and getting json
-            JsonObjectRequest jsonReq = new JsonObjectRequest(Method.GET,
-                    URL_FEED, null, new Response.Listener<JSONObject>() {
-
-                @Override
-                public void onResponse(JSONObject response) {
-                    VolleyLog.d(TAG, "Response: " + response.toString());
-                    if (response != null) {
-                        pDialog.hide();
-                        parseJsonFeed(response);
-
-                    }
-                }
-            }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    VolleyLog.d(TAG, "Error: " + error.getMessage());
-                    pDialog.hide();
-                }
-            });
-
-            // Adding request to volley request queue
-            AppController.getInstance().addToRequestQueue(jsonReq);
+            //show circle progress bar
+            circle_progress_bar.setVisibility(View.VISIBLE);
+            //execute remote request
+            fetchData();
         }
 
         return view;
+    }
+
+
+    //Http request in Json Format
+    public void fetchData(){
+        // making fresh volley request and getting json
+        JsonObjectRequest jsonReq = new JsonObjectRequest(Method.GET,
+                URL_FEED, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                VolleyLog.d(TAG, "Response: " + response.toString());
+                if (response != null) {
+                    swipeRefresh.refreshHide();
+                    circle_progress_bar.setVisibility(View.INVISIBLE);
+                    parseJsonFeed(response);
+
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                swipeRefresh.refreshHide();
+                circle_progress_bar.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        // Adding request to volley request queue
+        AppController.getInstance().addToRequestQueue(jsonReq);
+
     }
 
 

@@ -1,23 +1,17 @@
 package ve.ula.edukt_mobile;
 
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.MenuInflater;
 
 import ve.ula.edukt_mobile.adapter.FeedListAdapter;
 import ve.ula.edukt_mobile.app.AppController;
 import ve.ula.edukt_mobile.data.FeedItem;
+import ve.ula.edukt_mobile.library.SwipeRefresh;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -27,14 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.view.Menu;
 import android.widget.ListView;
-import android.widget.TextView;
 import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import com.android.volley.Cache;
@@ -69,7 +56,7 @@ public class TimeLineFragment extends Fragment {
     //private String URL_FEED = "http://api.androidhive.info/feed/feed.json";
     private String URL_FEED;
 
-    private SwipeRefreshLayout swipeContainer;
+    private SwipeRefresh swipeRefresh;
     //For handle the circle progress bar showing
     private CircleProgressBar circle_progress_bar;
 
@@ -119,23 +106,22 @@ public class TimeLineFragment extends Fragment {
         listAdapter = new FeedListAdapter(getActivity(), feedItems, "Timeline");
         listView.setAdapter(listAdapter);
 
-        //Define the click floating button action from API = 14 ice cream sandwich to android 5 lollipop
-        if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) && (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)){
-            FloatingActionButton myFab = (FloatingActionButton)  view.findViewById(R.id.fab_2);
-            myFab.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), NotificationsActivity.class);
-                    getActivity().startActivity(intent);
-                }
-            });
+        //Prepare the swipe refresh action
+        try {
+            swipeRefresh = new SwipeRefresh(view, (Object) this, TimeLineFragment.class.getMethod("fetchData"));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
         }
 
+        //Define the progress bar
+        circle_progress_bar = (CircleProgressBar) view.findViewById(R.id.circle_progress_bar);
+        circle_progress_bar.setColorSchemeResources(android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
 
 
         // We first check for cached request
         Cache cache = AppController.getInstance().getRequestQueue().getCache();
         Entry entry = cache.get(URL_FEED);
-        if (entry != null && !(entry.isExpired())) {
+        if (entry != null) {
             // fetch the data from cache
             try {
                 String data = new String(entry.data, "UTF-8");
@@ -151,39 +137,18 @@ public class TimeLineFragment extends Fragment {
 
         } else {
 
-            circle_progress_bar = (CircleProgressBar) view.findViewById(R.id.circle_progress_bar);
-            circle_progress_bar.setColorSchemeResources(android.R.color.holo_green_light,android.R.color.holo_orange_light,android.R.color.holo_red_light);
+            //show circle progress bar
             circle_progress_bar.setVisibility(View.VISIBLE);
-
-
-
-            fecthData();
+            //execute remote request
+            fetchData();
         }
-
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
-        // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
-                fecthData();
-                }
-        });
-
-        // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
 
         return view;
     }
 
 
     //Http request in Json Format
-    public void fecthData(){
+    public void fetchData(){
         // making fresh volley request and getting json
         JsonObjectRequest jsonReq = new JsonObjectRequest(Method.GET,
                 URL_FEED, null, new Response.Listener<JSONObject>() {
@@ -192,9 +157,7 @@ public class TimeLineFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 VolleyLog.d(TAG, "Response: " + response.toString());
                 if (response != null) {
-                    swipeContainer.setRefreshing(false);
-                    //pDialog.hide();
-                    //listAdapter.clear();
+                    swipeRefresh.refreshHide();
                     circle_progress_bar.setVisibility(View.INVISIBLE);
                     parseJsonFeed(response);
 
@@ -205,6 +168,7 @@ public class TimeLineFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
+                swipeRefresh.refreshHide();
                 circle_progress_bar.setVisibility(View.INVISIBLE);
             }
         });

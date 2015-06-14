@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -54,6 +56,20 @@ public class LoginActivity extends Activity {
 		// Importing all assets like buttons, text fields
 		inputEmail = (EditText) findViewById(R.id.loginEmail);
 		inputPassword = (EditText) findViewById(R.id.loginPassword);
+        //Define the ime action
+        inputPassword.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    btnLogin.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
+
 		//btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin = (TextView) findViewById(R.id.btnLogin);
 		btnLinkToRegister = (TextView) findViewById(R.id.btnLinkToRegisterScreen);
@@ -120,12 +136,14 @@ public class LoginActivity extends Activity {
 		// Link to Register Screen
 		btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
-			public void onClick(View view) {
-				Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-				startActivity(i);
-				//finish();
-			}
-		});
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(i);
+                //finish();
+            }
+        });
+
+
 	}
 
 
