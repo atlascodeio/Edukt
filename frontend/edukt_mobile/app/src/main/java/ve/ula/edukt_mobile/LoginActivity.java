@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.design.widget.TextInputLayout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -67,13 +68,12 @@ public class LoginActivity extends Activity {
                 return false;
             }
         });
-
-
+        final TextInputLayout text_input_layout_password = (TextInputLayout) findViewById(R.id.text_input_layout_password);
+        text_input_layout_password.setErrorEnabled(true);
 
 		//btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin = (TextView) findViewById(R.id.btnLogin);
 		btnLinkToRegister = (TextView) findViewById(R.id.btnLinkToRegisterScreen);
-		loginErrorMsg = (TextView) findViewById(R.id.login_error);
 
 		// Login button Click Event
 		btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +90,6 @@ public class LoginActivity extends Activity {
                     // check for login response
                     try {
                         if (json.getString(KEY_SUCCESS) != "success") {
-                            loginErrorMsg.setText("");
                             String res = json.getString(KEY_SUCCESS);
                             if(Integer.parseInt(res) == 1){
                                 // user successfully logged in
@@ -114,7 +113,7 @@ public class LoginActivity extends Activity {
                                 finish();
                             }else{
                                 // Error in login
-                                loginErrorMsg.setText("Incorrect username/password");
+                                text_input_layout_password.setError(getString(R.string.error_bad_login));
                             }
                         }
                     } catch (JSONException e) {
@@ -125,8 +124,9 @@ public class LoginActivity extends Activity {
 
 
                 }catch(Exception e){
-                    Log.d("Button", "Loginooooo fail");
-                    loginErrorMsg.setText("API2. server unreachable");
+                    //Log.d("Button", "Loginooooo fail");
+                    text_input_layout_password.setError("API2. server unreachable");
+                    //e.printStackTrace();
                 }
 
 

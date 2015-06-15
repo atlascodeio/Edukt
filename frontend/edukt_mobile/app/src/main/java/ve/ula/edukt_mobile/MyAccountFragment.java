@@ -1,20 +1,26 @@
 package ve.ula.edukt_mobile;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ve.ula.edukt_mobile.app.AppController;
 import ve.ula.edukt_mobile.library.DatabaseHandler;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,6 +60,8 @@ public class MyAccountFragment extends Fragment {
     private String URL_FEED;
     //For handle the circle progress bar showing
     private CircleProgressBar circle_progress_bar;
+    private static final int SELECT_PICTURE = 1;
+    private NetworkImageView profilePic;
 
 
     /**
@@ -181,12 +189,79 @@ public class MyAccountFragment extends Fragment {
 
             // user profile pic
             ImageLoader imageLoader = AppController.getInstance().getImageLoader();
-            NetworkImageView profilePic = (NetworkImageView) view.findViewById(R.id.profilePic);
-             profilePic.setDefaultImageResId(R.drawable.profile);
+            profilePic = (NetworkImageView) view.findViewById(R.id.profilePic);
+            profilePic.setDefaultImageResId(R.drawable.profile);
             profilePic.setImageUrl(response.getString("profilePic"), imageLoader);
+
+            //Define the profile picture onClick action for profile picture change
+            profilePic.setOnClickListener(changeProfilePicture());
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+
+    }
+
+
+    //action for profile picture change
+    public View.OnClickListener changeProfilePicture(){
+
+        return new View.OnClickListener(){
+            public void onClick(View view){
+
+                //prepare new intent for image pick
+                Intent pickIntent = new Intent();
+                //just for images all types
+                pickIntent.setType("image/*");
+                //pickIntent.setAction(Intent.ACTION_GET_CONTENT);
+                pickIntent.setAction(Intent.ACTION_PICK);
+                pickIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                //prepare other intent for camera application capture an image and return it.
+                Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                String pickTitle = getString(R.string.chooser_title);
+
+                //chooser dialog for multiple app response to intent
+                Intent chooserIntent = Intent.createChooser(pickIntent, pickTitle);
+                chooserIntent.putExtra(
+                        Intent.EXTRA_INITIAL_INTENTS, new Intent[] { takePhotoIntent }
+                );
+
+                //trigger intent for receive a result image
+                startActivityForResult(chooserIntent, SELECT_PICTURE);
+            }
+        };
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((requestCode == SELECT_PICTURE) && (resultCode == Activity.RESULT_OK)) {
+
+            //To know the type of Intent's action
+            String action = data.getAction();
+
+            //Galery
+            if(action == null){
+                try {
+                    InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    profilePic.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+            }else { //Camera
+                Bundle extras = data.getExtras();
+                if(extras.containsKey("data")) {
+                    Bitmap bitmap = (Bitmap) extras.get("data");
+                    profilePic.setImageBitmap(bitmap);
+                }else{
+                    Toast.makeText(getActivity(), "Fail to capture Image", Toast.LENGTH_LONG).show();
+                }
+            }
         }
     }
 
