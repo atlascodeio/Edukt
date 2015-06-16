@@ -17,8 +17,10 @@ use yii\db\Expression;
 
 
 
+
+
 /**
- * DocsController implements the CRUD actions for Docs model.
+ * JsonRespController implement all celphone app web interaction,  must be converted to RESfull API
  */
 class JsonRespController extends Controller
 {
@@ -223,6 +225,29 @@ class JsonRespController extends Controller
     	$json = json_encode($final);
     	echo $json;
     	 
+    }
+    
+    
+    /**
+     * Return string with 1 success and 0 error
+     * @return mixed
+     */
+    public function actionAddNotifications()
+    {
+    
+    	//dont need read input cuz stringRequest
+    	//$body = file_get_contents('php://input');
+    	//$postvars = json_decode($body, true);
+    	$unique_id = $_POST["id"];
+    	
+    	//find the user loged data object
+    	$user = Users::findOne(['unique_id'=>$unique_id]);
+    	$notas = new Notas();
+    	$notas->nombre = $_POST["nombre"];
+    	$notas->descripcion = $_POST["descripcion"];
+    	$notas->users_id = $user->uid;
+    	$notas->created_at = new Expression("NOW()");
+    	return $notas->save(false);
     }
     
     
