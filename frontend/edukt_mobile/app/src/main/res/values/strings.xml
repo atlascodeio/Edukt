@@ -61,7 +61,7 @@
     <string name="url_json_getmyaccount">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/get-my-account</string>
     <string name="url_json_getuniversidades">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/get-universidades</string>
 
-    <string name="url_json_addnotifications9">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/add-notifications</string>
+    <string name="url_json_addnotifications">http://www.i3soluciones.com/edukt/edukt_web/web/json-resp/add-notifications</string>
 
     <!-- myAccount -->
     <string name="account_name">Nombre:</string>
