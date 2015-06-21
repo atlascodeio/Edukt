@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -161,12 +162,13 @@ public class RegisterActivity extends ActionBarActivity {
 							Intent dashboard = new Intent(getApplicationContext(), DashboardActivity.class);
 							// Close all views before launching Dashboard
 							dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							Toast.makeText(getApplicationContext(), getString(R.string.register_user_success), Toast.LENGTH_LONG).show();
 							startActivity(dashboard);
 							// Close Registration Screen
 							finish();
 						}else{
 							// Error in registration
-							registerErrorMsg.setText("Error occured in registration");
+                            Toast.makeText(getApplicationContext(), getString(R.string.register_user_error), Toast.LENGTH_LONG).show();
 						}
 					}
 				} catch (JSONException e) {

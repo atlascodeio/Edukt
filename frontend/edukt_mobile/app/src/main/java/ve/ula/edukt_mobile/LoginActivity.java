@@ -139,6 +139,7 @@ public class LoginActivity extends Activity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
+                //overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom);
                 //finish();
             }
         });

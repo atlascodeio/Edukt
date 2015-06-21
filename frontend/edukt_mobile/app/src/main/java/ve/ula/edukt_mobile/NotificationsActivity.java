@@ -1,5 +1,6 @@
 package ve.ula.edukt_mobile;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -91,9 +92,10 @@ public class NotificationsActivity extends ActionBarActivity {
             public void onResponse(String response) {
                 VolleyLog.d(TAG, "Response: " + response.toString());
                 if (response != null) {
-                    Log.d("fgffgf", response.toString());
                     Toast.makeText(getApplicationContext(), getString(R.string.add_notifications_success), Toast.LENGTH_LONG).show();
-                    btnGuardar.setEnabled(true);
+                    //redirect to msg list fragment
+                    finish();
+                    //btnGuardar.setEnabled(true);
                 }
             }
         }, new Response.ErrorListener() {

@@ -72,6 +72,10 @@
     <string name="title_activity_notifications">NotificationsActivity</string>
     <string name="chooser_title">Seleccione o tome una nueva foto</string>
 
+    <!-- Register -->
+    <string name="register_user_success">Usuario registrado exitosamente</string>
+    <string name="register_user_error">Ocurrio un error durante el registro</string>
+
     <!-- Notifications -->
     <string name="hint_notifications_title">Ingrese el titulo del mensaje:</string>
     <string name="hint_notifications_bar_title">Redactar mensaje</string>
