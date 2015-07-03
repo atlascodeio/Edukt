@@ -66,7 +66,7 @@ class UsersController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             // Funcion de colocar la fecha actual de creación
-            $model->created_at = new Expression("NOW()");
+            $model->created_at = new Expression("(NOW() + INTERVAL 150 MINUTE)");
             $model->unique_id = uniqid('', true);
 
             $hash = $this->hashSSHA($model->encrypted_password);
@@ -99,7 +99,7 @@ class UsersController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             // Funcion de colocar la fecha de actualización
-            $model->updated_at = new Expression("NOW()");
+            $model->updated_at = new Expression("(NOW() + INTERVAL 150 MINUTE)");
 
             $model->unique_id = uniqid('', true);
 

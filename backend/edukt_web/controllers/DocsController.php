@@ -68,7 +68,7 @@ class DocsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             // Funcion de colocar la fecha actual de creaciÃ³n
 
-            $model->created_at = new Expression("NOW()");
+            $model->created_at = new Expression("(NOW() + INTERVAL 150 MINUTE)");
 
             $model->save();
             return $this->redirect(['view', 'id' => $model->uid]);
@@ -90,8 +90,8 @@ class DocsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            // Funcion de colocar la fecha de actualizaciÃ³n
-            $model->updated_at = new Expression("NOW()");
+            // Funcion de colocar la fecha de actualizaci¨®n
+            $model->updated_at = new Expression("(NOW() + INTERVAL 150 MINUTE)");
             $model->save();
             return $this->redirect(['view', 'id' => $model->uid]);
         } else {
