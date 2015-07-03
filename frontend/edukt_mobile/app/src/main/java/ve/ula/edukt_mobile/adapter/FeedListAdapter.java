@@ -119,6 +119,7 @@ public class FeedListAdapter extends BaseAdapter {
 		}
 
 		// user profile pic
+		profilePic.setDefaultImageResId(R.drawable.profile);
 		profilePic.setImageUrl(item.getProfilePic(), imageLoader);
 
 		//If modulo is not teachers then remove the other1 textview
