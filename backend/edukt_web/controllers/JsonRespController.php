@@ -133,7 +133,7 @@ class JsonRespController extends Controller
     		$result[$key]['status'] = $nota['descripcion'];
     		$result[$key]['profilePic'] = $nota->users->profile_pic;
 		$result[$key]['timeStamp'] = (strtotime($nota['created_at'])*1000) + 16190000;
-    		$result[$key]['url'] = null;
+    		$result[$key]['url'] = null;//
     	}
     	 
     	$final = array('feed'=>$result);
