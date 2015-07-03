@@ -132,7 +132,7 @@ class JsonRespController extends Controller
     		$result[$key]['image'] = null;
     		$result[$key]['status'] = $nota['descripcion'];
     		$result[$key]['profilePic'] = $nota->users->profile_pic;
-    		$result[$key]['timeStamp'] = strtotime($nota['created_at']).'999';
+    		$result[$key]['timeStamp'] = (strtotime($nota['created_at'])*1000) + 10000;
     		$result[$key]['url'] = null;
     	}
     	 
@@ -246,7 +246,7 @@ class JsonRespController extends Controller
     	$notas->nombre = $_POST["nombre"];
     	$notas->descripcion = $_POST["descripcion"];
     	$notas->users_id = $user->uid;
-    	$notas->created_at = new Expression("NOW()");
+    	$notas->created_at = new Expression("(NOW() + INTERVAL 150 MINUTE)");
     	return $notas->save(false);
     }
     
