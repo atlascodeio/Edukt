@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.lsjwzh.widget.materialloadingprogressbar.CircleProgressBar;
 
 import ve.ula.edukt_mobile.adapter.FeedListAdapter;
 import ve.ula.edukt_mobile.app.AppController;
@@ -67,6 +70,8 @@ public class RegisterActivity extends ActionBarActivity {
 	private List<FeedItem> feedItems;
 	private String URL_FEED;
 	private Universidad universidad_selected;
+    //For handle the circle progress bar showing
+    private CircleProgressBar circle_progress_bar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,12 +104,12 @@ public class RegisterActivity extends ActionBarActivity {
 		btnRegister = (TextView) findViewById(R.id.btnRegister);
 		//btnLinkToLogin = (TextView) findViewById(R.id.btnLinkToLoginScreen);
 		registerErrorMsg = (TextView) findViewById(R.id.register_error);
-
 		inputSpinner = (Spinner) findViewById(R.id.registerUniversidad);
 		//Obtengo las universidades de la BD
-		final ProgressDialog pDialog = new ProgressDialog(this);
-		pDialog.setMessage(getString(R.string.progress_dialog));
-		pDialog.show();
+        //Define the progress bar
+        circle_progress_bar = (CircleProgressBar) findViewById(R.id.circle_progress_bar);
+        circle_progress_bar.setColorSchemeResources(android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        circle_progress_bar.setVisibility(View.VISIBLE);
 		//Url to get json response
 		URL_FEED =   getString(R.string.url_json_getuniversidades);
 		// making fresh volley request and getting json
@@ -115,7 +120,8 @@ public class RegisterActivity extends ActionBarActivity {
 			public void onResponse(JSONObject response) {
 				VolleyLog.d(TAG, "Response: " + response.toString());
 				if (response != null) {
-					pDialog.hide();
+                    circle_progress_bar.setVisibility(View.GONE);
+                    ((LinearLayout) findViewById(R.id.linear_base)).setVisibility(View.VISIBLE);
 					parseJsonFeed(response, inputSpinner);
 
 				}
@@ -125,7 +131,7 @@ public class RegisterActivity extends ActionBarActivity {
 			@Override
 			public void onErrorResponse(VolleyError error) {
 				VolleyLog.d(TAG, "Error: " + error.getMessage());
-				pDialog.hide();
+                circle_progress_bar.setVisibility(View.GONE);
 			}
 		});
 

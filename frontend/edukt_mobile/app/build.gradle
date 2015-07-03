@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "ve.ula.edukt_mobile"
-        minSdkVersion 8
+        minSdkVersion 15 //8
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -25,6 +25,7 @@ dependencies {
     compile 'com.android.support:support-v4:22.0.0'
     compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.android.support:design:22.2.0'
-    compile('com.lsjwzh:materialloadingprogressbar:0.5.5-RELEASE')
+    compile 'com.lsjwzh:materialloadingprogressbar:0.5.5-RELEASE'
     compile files('libs/volley.jar')
+    compile files('libs/oval-1.84.jar')
 }

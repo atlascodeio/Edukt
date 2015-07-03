@@ -24,7 +24,7 @@
             android:layout_marginBottom="20dp"/>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/username_text_input_layoutgg"
+            android:id="@+id/email_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.v7.widget.AppCompatEditText
@@ -39,7 +39,7 @@
 
         <!--  Password TextField -->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_layout_password"
+            android:id="@+id/password_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.v7.widget.AppCompatEditText
@@ -49,7 +49,7 @@
                 android:inputType="textPassword"
                 android:hint="@string/password"
                 style="@style/EditText"
-                android:imeOptions="actionDone"/>
+                android:imeOptions="actionDone" />
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout

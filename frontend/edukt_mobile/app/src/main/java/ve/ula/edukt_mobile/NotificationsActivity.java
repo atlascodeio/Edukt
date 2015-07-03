@@ -65,6 +65,7 @@ public class NotificationsActivity extends ActionBarActivity {
 
         //onClick Listener button fab guardar
         btnGuardar = (TextView) findViewById(R.id.raised_button);
+        btnGuardar.setText(getString(R.string.button_add_notifications));
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

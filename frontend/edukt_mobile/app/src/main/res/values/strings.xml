@@ -75,20 +75,27 @@
     <!-- Register -->
     <string name="register_user_success">Usuario registrado exitosamente</string>
     <string name="register_user_error">Ocurrio un error durante el registro</string>
+    <string name="button_register">Registrar</string>
 
     <!-- Notifications -->
     <string name="hint_notifications_title">Ingrese el titulo del mensaje:</string>
     <string name="hint_notifications_bar_title">Redactar mensaje</string>
     <string name="hint_notifications_descripcion">Ingrese el cuerpo del mensaje:</string>
-    <string name="add_notifications_success">Nota guardada con exito</string>
-    <string name="add_notifications_error">Error al guardar la nota</string>
+    <string name="add_notifications_success">Mensaje publicado con exito</string>
+    <string name="add_notifications_error">Error al publicar el mensaje</string>
+    <string name="button_add_notifications">Publicar</string>
 
     <!-- Buttons -->
     <string name="button_guardar">Guardar</string>
     <string name="button_volver">Volver</string>
 
-    <!-- Error msg -->
-    <string name="error_bad_login">Usuario/Contrase;a incorrecta</string>
+    <!-- Login -->
+    <string name="error_bad_login">Usuario/Contraseña incorrecta</string>
+    <string name="password_incorrect_length">incorrecta</string>
+    <string name="server_unreachable">Sin conexion con el servidor</string>
+
+
+
 
     <string name="password_font">sans-serif</string>
 
