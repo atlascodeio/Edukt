@@ -67,9 +67,9 @@ class NotasController extends Controller
             // Funcion de colocar la fecha actual de creación
             $model->created_at = new Expression("(NOW() + INTERVAL 150 MINUTE)");
             $model->save(false);
-            return $this->redirect(['view', 'id' => $model->uid]);
+            return $this->redirect(['index', 'id' => $model->uid]);
         } else {
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
             ]);
         }

@@ -62,7 +62,7 @@ class JsonRespController extends Controller
     		$result[$key]['image'] = null;
     		$result[$key]['status'] = $doc->descripcion;
     		$result[$key]['profilePic'] = $doc->users->profile_pic;
-    		$result[$key]['timeStamp'] = (strtotime($doc->created_at)*1000) + 16190000;
+    		$result[$key]['timeStamp'] = strtotime($doc->created_at).'999';
     		$result[$key]['url'] = $doc->url_doc;
     		$result[$key]['nombre'] = $doc->nombre;
     	}
@@ -75,7 +75,7 @@ class JsonRespController extends Controller
     		$result[$key_aux]['image'] = null;
     		$result[$key_aux]['status'] = $nota['descripcion'];
     		$result[$key_aux]['profilePic'] = $nota->users->profile_pic;
-    		$result[$key_aux]['timeStamp'] = (strtotime($nota['created_at'])*1000) + 16190000;
+    		$result[$key_aux]['timeStamp'] = strtotime($nota['created_at']).'999';
     		//$final[$key_aux]['created_at'] = strtotime($doc['created_at']);
     		$result[$key_aux]['url'] = null;
     	}
@@ -132,8 +132,8 @@ class JsonRespController extends Controller
     		$result[$key]['image'] = null;
     		$result[$key]['status'] = $nota['descripcion'];
     		$result[$key]['profilePic'] = $nota->users->profile_pic;
-		$result[$key]['timeStamp'] = (strtotime($nota['created_at'])*1000) + 16190000;
-    		$result[$key]['url'] = null;//
+    		$result[$key]['timeStamp'] = (strtotime($nota['created_at'])*1000) + 10000;
+    		$result[$key]['url'] = null;
     	}
     	 
     	$final = array('feed'=>$result);
@@ -161,7 +161,7 @@ class JsonRespController extends Controller
     		$result[$key]['image'] = null;
     		$result[$key]['status'] = $doc->descripcion;
     		$result[$key]['profilePic'] = $doc->users->profile_pic;
-    		$result[$key]['timeStamp'] = (strtotime($doc->created_at)*1000) + 16190000;
+    		$result[$key]['timeStamp'] = strtotime($doc->created_at).'999';
     		$result[$key]['url'] = $doc->url_doc;
     		$result[$key]['nombre'] = $doc->nombre;
     	}
